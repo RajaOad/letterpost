@@ -1,0 +1,395 @@
+/* Import vintage fonts */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Dancing+Script:wght@400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=IM+Fell+English:ital@0;1&display=swap');
+
+/* Base styles with vintage paper background */
+:root {
+  --parchment: #f4e8d0;
+  --parchment-dark: #e6d5b5;
+  --parchment-light: #faf6ed;
+  --ink: #2c241b;
+  --ink-light: #5c4d3d;
+  --wax-red: #8b2635;
+  --wax-green: #2d5016;
+  --wax-blue: #1e3a5f;
+  --wax-gold: #b8860b;
+  --shadow: rgba(44, 36, 27, 0.15);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Crimson Text', Georgia, serif;
+  background-color: var(--parchment);
+  background-image: 
+    url("data:image/svg+xml,%3Csvg width='400' height='400' viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E"),
+    linear-gradient(135deg, #e6d5b5 0%, #f4e8d0 50%, #e8d4b8 100%);
+  background-attachment: fixed;
+  color: var(--ink);
+  min-height: 100vh;
+}
+
+/* Custom scrollbar - vintage style */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--parchment-dark);
+  border-left: 1px solid #d4c4a8;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #a88b5a 0%, #8b7248 100%);
+  border-radius: 5px;
+  border: 2px solid var(--parchment-dark);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #8b7248 0%, #6b5a3a 100%);
+}
+
+/* Selection - ink stain style */
+::selection {
+  background: rgba(139, 38, 53, 0.25);
+  color: var(--ink);
+}
+
+/* Typography */
+.font-serif {
+  font-family: 'Cormorant Garamond', 'IM Fell English', Georgia, serif;
+}
+
+.font-script {
+  font-family: 'Dancing Script', cursive;
+}
+
+.font-body {
+  font-family: 'Crimson Text', Georgia, serif;
+}
+
+/* Vintage paper card effect */
+.vintage-card {
+  background: linear-gradient(135deg, var(--parchment-light) 0%, var(--parchment) 100%);
+  border: 1px solid #d4c4a8;
+  box-shadow: 
+    0 1px 2px rgba(0,0,0,0.05),
+    0 2px 4px rgba(0,0,0,0.05),
+    0 4px 8px rgba(0,0,0,0.05),
+    0 8px 16px rgba(0,0,0,0.05),
+    inset 0 0 60px rgba(139, 69, 19, 0.03);
+  position: relative;
+}
+
+.vintage-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+/* Aged paper edges */
+.aged-paper {
+  position: relative;
+  background: var(--parchment-light);
+}
+
+.aged-paper::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  box-shadow: inset 0 0 80px rgba(139, 69, 19, 0.1);
+  pointer-events: none;
+}
+
+/* Wax seal */
+.wax-seal {
+  background: radial-gradient(circle at 30% 30%, #a03040 0%, var(--wax-red) 50%, #6b1a25 100%);
+  box-shadow: 
+    0 2px 4px rgba(0,0,0,0.3),
+    0 4px 8px rgba(0,0,0,0.2),
+    inset 0 -2px 4px rgba(0,0,0,0.2),
+    inset 0 2px 4px rgba(255,255,255,0.2);
+  position: relative;
+}
+
+.wax-seal::before {
+  content: '';
+  position: absolute;
+  top: 10%;
+  left: 10%;
+  right: 10%;
+  bottom: 10%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 40%, rgba(255,255,255,0.3) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.wax-seal-green {
+  background: radial-gradient(circle at 30% 30%, #4a7c2a 0%, var(--wax-green) 50%, #1a3509 100%);
+}
+
+.wax-seal-blue {
+  background: radial-gradient(circle at 30% 30%, #3d5a8a 0%, var(--wax-blue) 50%, #0f1f35 100%);
+}
+
+.wax-seal-gold {
+  background: radial-gradient(circle at 30% 30%, #d4a030 0%, var(--wax-gold) 50%, #7a5c08 100%);
+}
+
+/* Envelope styles */
+.envelope {
+  background: linear-gradient(135deg, #e8dcc0 0%, #d4c4a8 100%);
+  position: relative;
+  box-shadow: 
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255,255,255,0.3);
+}
+
+.envelope::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(180deg, #d4c4a8 0%, #c4b498 100%);
+  clip-path: polygon(0 0, 50% 40%, 100% 0, 100% 100%, 0 100%);
+  transform-origin: top;
+  transition: transform 0.6s ease;
+  z-index: 2;
+}
+
+.envelope.open::before {
+  transform: rotateX(180deg);
+}
+
+.envelope-flap {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(0deg, #c4b498 0%, #d4c4a8 100%);
+  clip-path: polygon(0 100%, 50% 0, 100% 100%);
+  z-index: 1;
+}
+
+/* Handwritten text effect */
+.handwritten {
+  font-family: 'Dancing Script', cursive;
+  color: var(--ink);
+  text-shadow: 0 0 1px rgba(44, 36, 27, 0.1);
+}
+
+/* Ink text */
+.ink-text {
+  color: var(--ink);
+  text-shadow: 0 0 0.5px rgba(44, 36, 27, 0.3);
+}
+
+/* Vintage button */
+.vintage-btn {
+  background: linear-gradient(180deg, #8b2635 0%, #6b1a25 100%);
+  border: 1px solid #5a151f;
+  color: #f4e8d0;
+  font-family: 'Cormorant Garamond', serif;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  box-shadow: 
+    0 2px 4px rgba(0,0,0,0.2),
+    inset 0 1px 0 rgba(255,255,255,0.2);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.vintage-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.5s;
+}
+
+.vintage-btn:hover::before {
+  left: 100%;
+}
+
+.vintage-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+.vintage-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+
+/* Vintage input */
+.vintage-input {
+  background: rgba(244, 232, 208, 0.5);
+  border: 1px solid #c4b498;
+  border-bottom: 2px solid #8b7248;
+  font-family: 'Crimson Text', serif;
+  color: var(--ink);
+  transition: all 0.3s ease;
+}
+
+.vintage-input:focus {
+  outline: none;
+  border-color: #8b2635;
+  background: rgba(244, 232, 208, 0.8);
+  box-shadow: 0 2px 8px rgba(139, 38, 53, 0.1);
+}
+
+/* Letter paper */
+.letter-paper {
+  background: #faf6ed;
+  background-image: 
+    url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E");
+  box-shadow: 
+    0 1px 1px rgba(0,0,0,0.1),
+    0 2px 2px rgba(0,0,0,0.1),
+    0 4px 4px rgba(0,0,0,0.1),
+    0 8px 8px rgba(0,0,0,0.1);
+  position: relative;
+}
+
+.letter-paper::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  box-shadow: inset 0 0 100px rgba(139, 69, 19, 0.05);
+  pointer-events: none;
+}
+
+/* Postmark stamp */
+.postmark {
+  font-family: 'Courier New', monospace;
+  color: rgba(139, 38, 53, 0.4);
+  border: 2px solid rgba(139, 38, 53, 0.3);
+  border-radius: 4px;
+  padding: 4px 8px;
+  transform: rotate(-5deg);
+  display: inline-block;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* Animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(1deg); }
+}
+
+@keyframes sealPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+@keyframes inkSpread {
+  0% { opacity: 0; transform: scale(0.9); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes paperSlide {
+  0% { transform: translateY(20px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-seal {
+  animation: sealPulse 3s ease-in-out infinite;
+}
+
+.animate-ink {
+  animation: inkSpread 0.6s ease-out;
+}
+
+.animate-paper {
+  animation: paperSlide 0.8s ease-out;
+}
+
+/* Line clamp utilities */
+.line-clamp-1 {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* First letter drop cap */
+.drop-cap::first-letter {
+  float: left;
+  font-family: 'Dancing Script', cursive;
+  font-size: 3.5rem;
+  line-height: 0.8;
+  margin-right: 0.1em;
+  margin-top: 0.1em;
+  color: var(--wax-red);
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+/* Transit animation */
+.transit-line {
+  background: linear-gradient(90deg, transparent, #d4a030, transparent);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Delete button hover effect */
+.delete-btn {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.group:hover .delete-btn {
+  opacity: 1;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .vintage-card {
+    margin: 0.5rem;
+  }
+}
