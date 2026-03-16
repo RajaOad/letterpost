@@ -33,7 +33,7 @@ export default function Auth() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-amber-100 p-4 relative overflow-hidden">
+    <div className="min-h-screen flex items-center justify-center bg-amber-100 relative overflow-hidden">
       {/* Background effects - desktop only */}
       {!isMobile && (
         <>
@@ -45,10 +45,10 @@ export default function Auth() {
         </>
       )}
 
-      <div className="w-full max-w-md relative z-10 px-2">
-        {/* Header - Logo fixed for mobile */}
+      <div className="w-full max-w-md relative z-10 p-4">
+        {/* Header */}
         <div className="text-center mb-6 md:mb-8">
-          <div className="w-20 h-20 md:w-28 md:h-28 mx-auto mb-4 md:mb-6 rounded-full bg-linear-to-br from-red-800 via-red-700 to-red-900 flex items-center justify-center shadow-xl border-4 border-amber-200 shrink-0">
+          <div className="w-20 h-20 md:w-28 md:h-28 mx-auto mb-4 md:mb-6 rounded-full bg-linear-to-br from-red-800 via-red-700 to-red-900 flex items-center justify-center shadow-xl border-4 border-amber-200">
             <BookOpen className="w-10 h-10 md:w-14 md:h-14 text-amber-100" />
           </div>
           <h1 className="font-serif text-4xl md:text-5xl text-amber-950 mb-2 md:mb-3 font-bold tracking-wide">Slow Letters</h1>
