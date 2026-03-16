@@ -9,27 +9,16 @@ export default defineConfig({
   ],
   build: {
     target: 'esnext',
-    // Note: In Vite 8, esbuild is the default and extremely fast. 
-    // Only keep 'terser' if you specifically need its advanced compression features.
-    minify: 'terser', 
+    // FIX: Remove 'terser' and use 'esbuild' (the default) 
+    // This is much more stable with Rolldown/Vite 8.
+    minify: 'esbuild', 
     rollupOptions: {
       output: {
-        // FIXED: Using the function syntax required by Vite 8 / Rolldown
         manualChunks(id) {
           if (id.includes('node_modules')) {
-            if (id.includes('react') || id.includes('react-dom')) {
-              return 'vendor-react';
-            }
-            if (id.includes('framer-motion')) {
-              return 'vendor-motion';
-            }
-            if (id.includes('@supabase')) {
-              return 'vendor-supabase';
-            }
-            if (id.includes('date-fns') || id.includes('lucide-react')) {
-              return 'vendor-utils';
-            }
-            // Optional: Group all other dependencies into a general vendor chunk
+            if (id.includes('react')) return 'vendor-react';
+            if (id.includes('framer-motion')) return 'vendor-motion';
+            if (id.includes('@supabase')) return 'vendor-supabase';
             return 'vendor';
           }
         },
