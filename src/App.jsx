@@ -1,20 +1,15 @@
-import React, { Suspense, lazy } from 'react'
+import React from 'react'
+import { motion, LazyMotion, domAnimation } from 'framer-motion'
 import { AuthProvider } from './contexts/AuthContext'
+import Auth from './components/Auth'
+import Mailbox from './components/Mailbox'
+import LetterEditor from './components/LetterEditor'
+import LetterView from './components/LetterView'
+import Navigation from './components/Navigation'
 import { useAuth } from './contexts/AuthContext'
 
-// Lazy load components for better performance
-const Auth = lazy(() => import('./components/Auth'))
-const Mailbox = lazy(() => import('./components/Mailbox'))
-const LetterEditor = lazy(() => import('./components/LetterEditor'))
-const LetterView = lazy(() => import('./components/LetterView'))
-const Navigation = lazy(() => import('./components/Navigation'))
-
-// Simple loading fallback
-const LoadingFallback = () => (
-  <div className="min-h-screen flex items-center justify-center bg-amber-50">
-    <div className="w-12 h-12 border-4 border-amber-900 border-t-transparent rounded-full animate-spin"></div>
-  </div>
-)
+// Check if mobile for reduced motion
+const isMobile = typeof window !== 'undefined' && window.innerWidth < 768
 
 function AppContent() {
   const { user, loading } = useAuth()
@@ -22,37 +17,61 @@ function AppContent() {
   const [selectedLetter, setSelectedLetter] = React.useState(null)
 
   if (loading) {
-    return <LoadingFallback />
-  }
-
-  if (!user) {
     return (
-      <Suspense fallback={<LoadingFallback />}>
-        <Auth />
-      </Suspense>
+      <div className="min-h-screen flex items-center justify-center bg-amber-50">
+        {!isMobile && (
+          <div className="absolute inset-0 opacity-10 pointer-events-none" style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.5'/%3E%3C/svg%3E")`
+          }}></div>
+        )}
+        <div className="text-center relative z-10">
+          {!isMobile ? (
+            <motion.div 
+              animate={{ rotate: 360 }}
+              transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+              className="w-20 h-20 border-4 border-amber-900 border-t-transparent rounded-full mx-auto mb-6"
+            />
+          ) : (
+            <div className="w-16 h-16 border-4 border-amber-900 border-t-transparent rounded-full mx-auto mb-4 animate-spin" />
+          )}
+          <p className="font-serif text-2xl text-amber-900 italic">Sorting the post...</p>
+        </div>
+      </div>
     )
   }
 
+  if (!user) {
+    return <Auth />
+  }
+
   return (
-    <div className="min-h-screen bg-amber-50">
-      <Suspense fallback={<LoadingFallback />}>
+    <div className="min-h-screen bg-amber-50 relative">
+      {/* Simplified background for mobile */}
+      {!isMobile && (
+        <div className="fixed inset-0 opacity-10 pointer-events-none" style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.5'/%3E%3C/svg%3E")`
+        }}></div>
+      )}
+
+      <div className="relative z-10">
         <Navigation 
           currentView={currentView} 
           setCurrentView={setCurrentView}
           setSelectedLetter={setSelectedLetter}
         />
-      </Suspense>
-      
-      <main className="container mx-auto px-4 py-6 max-w-6xl">
-        <Suspense fallback={<LoadingFallback />}>
+        <main className="container mx-auto px-4 py-8 md:py-12 max-w-6xl">
           {currentView === 'mailbox' && (
-            <Mailbox onOpenLetter={(letter) => {
-              setSelectedLetter(letter)
-              setCurrentView('letter')
-            }} />
+            <Mailbox 
+              onOpenLetter={(letter) => {
+                setSelectedLetter(letter)
+                setCurrentView('letter')
+              }}
+            />
           )}
           {currentView === 'compose' && (
-            <LetterEditor onSent={() => setCurrentView('mailbox')} />
+            <LetterEditor 
+              onSent={() => setCurrentView('mailbox')}
+            />
           )}
           {currentView === 'letter' && selectedLetter && (
             <LetterView 
@@ -63,8 +82,8 @@ function AppContent() {
               }}
             />
           )}
-        </Suspense>
-      </main>
+        </main>
+      </div>
     </div>
   )
 }
@@ -72,7 +91,9 @@ function AppContent() {
 function App() {
   return (
     <AuthProvider>
-      <AppContent />
+      <LazyMotion features={domAnimation}>
+        <AppContent />
+      </LazyMotion>
     </AuthProvider>
   )
 }
