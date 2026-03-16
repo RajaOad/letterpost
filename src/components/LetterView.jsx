@@ -72,7 +72,7 @@ export default function LetterView({ letter, onBack }) {
 
   if (isInTransit) {
     return (
-      <div className="max-w-2xl mx-auto px-4 pb-8">
+      <div className="max-w-2xl mx-auto px-4 pb-8 mauto pd-y">
         <button
           onClick={onBack}
           className="mb-6 md:mb-8 flex items-center gap-3 text-amber-900 hover:text-red-900 transition-colors font-serif group"
@@ -83,7 +83,7 @@ export default function LetterView({ letter, onBack }) {
           <span className="text-lg">Return to Post Office</span>
         </button>
 
-        <div className="bg-linear-to-b from-amber-100 via-amber-50 to-amber-100 rounded-sm shadow-2xl border-4 border-amber-800/20 p-8 md:p-12 text-center relative overflow-hidden">
+        <div className="bg-linear-to-b from-amber-100 via-amber-50 to-amber-100 rounded-sm shadow-2xl border-4 border-amber-800/20 p-8 md:p-12 text-center relative overflow-hidden mr-xy">
           {!isMobile && (
             <div className="absolute inset-0 opacity-30" style={{
               backgroundImage: `url("data:image/svg+xml,%3Csvg width='300' height='300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.4'/%3E%3C/svg%3E")`

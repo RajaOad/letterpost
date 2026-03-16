@@ -206,42 +206,83 @@ html {
   perspective: 1000px;
 }
 
+/* --- Vertical Padding --- */
 .pd-y {
-  padding: 3vh 0 ;
+  padding-top: 0rem;
+  padding-bottom: 0rem;
+}
+@media (min-width: 768px) {
+  .pd-y { padding: 3vh 0; }
 }
 
 .pd-y2 {
-  padding: 6vh 0;
+  padding-top: 3.5rem;
+  padding-bottom: 3.5rem;
+}
+@media (min-width: 768px) {
+  .pd-y2 { padding: 6vh 0; }
 }
 
+/* --- Horizontal Padding (Switched to vw for consistency) --- */
 .pd-x {
-  padding: 0 3vh;
+  padding-left: 5vw;
+  padding-right: 5vw;
+}
+@media (min-width: 768px) {
+  .pd-x { padding: 0 3vh; } /* Kept vh for PC per your original design */
 }
 
 .pd-x2 {
-  padding: 0 6vh;
+  padding-left: 8vw;
+  padding-right: 8vw;
+}
+@media (min-width: 768px) {
+  .pd-x2 { padding: 0 6vh; }
 }
 
+/* --- Combined Padding --- */
 .pd-xy {
-  padding: 2vh 3vh;
+  padding: 1.5rem 5vw;
+}
+@media (min-width: 768px) {
+  .pd-xy { padding: 2vh 3vh; }
 }
 
 .pd-xy2 {
-  padding: 4vh 6vh;
+  padding: 1.5rem 6vw;
+}
+@media (min-width: 768px) {
+  .pd-xy2 { padding: 4vh 6vh; }
 }
 
+/* --- Margins --- */
 .mr-xy {
-  margin: 2vh 3vh;
+  margin: 1rem 5vw;
+}
+@media (min-width: 768px) {
+  .mr-xy { margin: 2vh 3vh; }
 }
 
 .mr-l {
-  margin-left: 3vh;
+  margin-left: 1rem;
+}
+@media (min-width: 768px) {
+  .mr-l { margin-left: 3vh; }
 }
 
 .mr-b {
-  margin-bottom: 3vh;
+  margin-bottom: 1.5rem;
+}
+@media (min-width: 768px) {
+  .mr-b { margin-bottom: 3vh; }
 }
 
 .mauto {
   margin: auto;
+}
+
+/* --- Performance Boost --- */
+[class*="pd-"], [class*="mr-"] {
+  /* Forces the browser to treat these as GPU layers on mobile */
+  transform: translateZ(0);
 }
