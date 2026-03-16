@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { motion } from 'framer-motion'
 import { Mail, Lock, User, Feather, BookOpen } from 'lucide-react'
 import { useAuth } from '../contexts/AuthContext'
 
@@ -35,42 +34,30 @@ export default function Auth() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-amber-100 p-4 relative overflow-hidden">
-      {/* Simplified background - no heavy SVG filters on mobile */}
-      {!isMobile && (
-        <div className="absolute inset-0 opacity-20" style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='200' height='200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.15'/%3E%3C/svg%3E")`
-        }}></div>
-      )}
-
-      {/* Decorative elements - hidden on mobile */}
+      {/* NO background effects on mobile */}
       {!isMobile && (
         <>
+          <div className="absolute inset-0 opacity-20" style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='200' height='200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.15'/%3E%3C/svg%3E")`
+          }}></div>
           <div className="absolute top-10 left-10 w-32 h-32 rounded-full bg-red-900/5 blur-3xl"></div>
           <div className="absolute bottom-10 right-10 w-40 h-40 rounded-full bg-amber-900/5 blur-3xl"></div>
         </>
       )}
 
-      <motion.div 
-        initial={isMobile ? false : { opacity: 0, y: 30 }}
-        animate={isMobile ? false : { opacity: 1, y: 0 }}
-        className="w-full max-w-md relative z-10 px-2"
-      >
-        {/* Wax Seal Header - simplified on mobile */}
+      <div className="w-full max-w-md relative z-10 px-2">
+        {/* Header - NO animation on mobile */}
         <div className="text-center mb-6 md:mb-8">
-          <motion.div 
-            className="w-20 h-20 md:w-28 md:h-28 mx-auto mb-4 md:mb-6 rounded-full bg-gradient-to-br from-red-800 via-red-700 to-red-900 flex items-center justify-center shadow-2xl border-4 border-amber-200"
-            animate={isMobile ? {} : { rotate: [0, 5, -5, 0] }}
-            transition={isMobile ? {} : { duration: 6, repeat: Infinity, ease: "easeInOut" }}
-          >
+          <div className="w-20 h-20 md:w-28 md:h-28 mx-auto mb-4 md:mb-6 rounded-full bg-gradient-to-br from-red-800 via-red-700 to-red-900 flex items-center justify-center shadow-xl border-4 border-amber-200">
             <BookOpen className="w-10 h-10 md:w-14 md:h-14 text-amber-100" />
-          </motion.div>
+          </div>
           <h1 className="font-serif text-4xl md:text-5xl text-amber-950 mb-2 md:mb-3 font-bold tracking-wide">Slow Letters</h1>
           <p className="font-body text-amber-700 italic text-base md:text-lg">"Good things take time"</p>
         </div>
 
         {/* Auth Card */}
-        <div className="bg-amber-50 rounded-sm shadow-2xl border-2 border-amber-300 overflow-hidden relative">
-          {/* Texture - only on desktop */}
+        <div className="bg-amber-50 rounded-sm shadow-xl border-2 border-amber-300 overflow-hidden relative">
+          {/* NO texture on mobile */}
           {!isMobile && (
             <div className="absolute inset-0 opacity-20 pointer-events-none" style={{
               backgroundImage: `url("data:image/svg+xml,%3Csvg width='200' height='200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.15'/%3E%3C/svg%3E")`
@@ -165,7 +152,7 @@ export default function Auth() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-3 md:py-4 bg-gradient-to-r from-red-900 via-red-800 to-red-900 text-amber-100 font-serif text-lg md:text-xl rounded-sm hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed border-2 border-red-950 font-bold tracking-wide"
+              className="w-full py-3 md:py-4 bg-gradient-to-r from-red-900 via-red-800 to-red-900 text-amber-100 font-serif text-lg md:text-xl rounded-sm hover:shadow-lg transition-shadow disabled:opacity-50 disabled:cursor-not-allowed border-2 border-red-950 font-bold tracking-wide"
             >
               {loading ? 'Sealing envelope...' : isLogin ? 'Open Mailbox' : 'Create Account'}
             </button>
@@ -175,7 +162,7 @@ export default function Auth() {
         <p className="text-center mt-4 md:mt-6 font-body text-xs md:text-sm text-amber-700/70 italic px-4">
           By joining, you pledge to write with intention and patience
         </p>
-      </motion.div>
+      </div>
     </div>
   )
 }

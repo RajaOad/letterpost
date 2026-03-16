@@ -17,18 +17,10 @@ function AppContent() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-amber-50">
-        <div className="text-center relative z-10 px-4">
-          {!isMobile ? (
-            <motion.div 
-              animate={{ rotate: 360 }}
-              transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-              className="w-20 h-20 border-4 border-amber-900 border-t-transparent rounded-full mx-auto mb-6"
-            />
-          ) : (
-            <div className="w-16 h-16 border-4 border-amber-900 border-t-transparent rounded-full mx-auto mb-4 animate-spin" />
-          )}
-          <p className="font-serif text-2xl text-amber-900 italic">Sorting the post...</p>
+      <div className="min-h-screen flex items-center justify-center bg-amber-50 px-4">
+        <div className="text-center">
+          <div className="w-16 h-16 border-4 border-amber-900 border-t-transparent rounded-full mx-auto mb-4 animate-spin" />
+          <p className="font-serif text-xl text-amber-900 italic">Sorting the post...</p>
         </div>
       </div>
     )

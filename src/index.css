@@ -26,8 +26,6 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch;
 
   @media (max-width: 1024px) {
     font-size: 16px;
@@ -138,4 +136,72 @@ code {
 }
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
+}
+
+/* Mobile performance optimizations */
+@media (max-width: 768px) {
+  /* Reduce all shadows for better performance */
+  * {
+    box-shadow: none !important;
+  }
+  
+  /* Keep only essential shadows */
+  .shadow-md, .shadow-lg, .shadow-xl, .shadow-2xl {
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1) !important;
+  }
+  
+  /* Disable all transitions and animations */
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  /* Re-enable only button transitions */
+  button, .transition-all {
+    transition-duration: 0.15s !important;
+  }
+  
+  /* Reduce blur effects */
+  .blur-2xl, .blur-3xl, .blur-xl {
+    filter: none !important;
+  }
+  
+  /* Simplify gradients */
+  .bg-gradient-to-r, .bg-gradient-to-br, .bg-gradient-to-b, .bg-gradient-to-tr, .bg-gradient-to-tl {
+    background-image: none !important;
+    background-color: inherit !important;
+  }
+  
+  /* Keep essential gradients only */
+  .bg-gradient-to-br.from-red-900, 
+  .bg-gradient-to-r.from-red-900,
+  .bg-gradient-to-br.from-amber-200,
+  .bg-gradient-to-b.from-amber-100 {
+    background-image: inherit !important;
+  }
+}
+
+/* Smooth scrolling for touch devices */
+html {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Prevent text size adjustment on orientation change */
+html {
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+
+/* Hardware acceleration for animated elements */
+.will-change-transform {
+  will-change: transform;
+}
+
+/* GPU acceleration */
+.gpu-accelerated {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
 }

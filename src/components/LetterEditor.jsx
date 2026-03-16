@@ -76,22 +76,11 @@ export default function LetterEditor({ onSent }) {
   }
 
   return (
-    <div className="max-w-4xl mx-auto px-0 pb-8">
-      <motion.div 
-        initial={isMobile ? false : { opacity: 0, y: 30 }}
-        animate={isMobile ? false : { opacity: 1, y: 0 }}
-        className="bg-amber-50 rounded-sm shadow-2xl border-2 border-amber-800/20 overflow-hidden relative"
-      >
-        {/* Texture only on desktop */}
-        {!isMobile && (
-          <div className="absolute inset-0 opacity-20 pointer-events-none" style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.5'/%3E%3C/svg%3E")`
-          }}></div>
-        )}
-
+    <div className="max-w-4xl mx-auto px-2 sm:px-0 pb-8">
+      <div className="bg-amber-50 rounded-sm shadow-2xl border-2 border-amber-800/20 overflow-hidden relative">
         <div className="bg-gradient-to-r from-amber-200 via-amber-100 to-amber-200 px-4 md:px-8 py-6 md:py-8 border-b-2 border-amber-800/20 relative">
           <div className="flex items-center gap-3 md:gap-5">
-            <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-gradient-to-br from-red-900 via-red-800 to-red-950 shadow-2xl flex items-center justify-center border-4 border-amber-200 shrink-0">
+            <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-gradient-to-br from-red-900 via-red-800 to-red-950 shadow-lg flex items-center justify-center border-4 border-amber-200 shrink-0">
               <Scroll className="w-6 h-6 md:w-8 md:h-8 text-amber-100" />
             </div>
             <div>
@@ -114,7 +103,7 @@ export default function LetterEditor({ onSent }) {
                 value={recipientUsername}
                 onChange={(e) => setRecipientUsername(e.target.value)}
                 onBlur={() => checkRecipient(recipientUsername)}
-                className="w-full px-4 md:px-6 py-3 md:py-4 bg-[#fdfbf7] border-2 border-amber-800/20 rounded-sm font-body text-base md:text-lg text-amber-900 placeholder-amber-400 focus:outline-none focus:border-amber-800/40 focus:ring-4 focus:ring-amber-100 transition-all shadow-inner"
+                className="w-full px-4 md:px-6 py-3 md:py-4 bg-[#fdfbf7] border-2 border-amber-800/20 rounded-sm font-body text-base md:text-lg text-amber-900 placeholder-amber-400 focus:outline-none focus:border-amber-800/40 focus:ring-2 focus:ring-amber-100 transition-all shadow-inner"
                 required
               />
               {foundRecipient && (
@@ -133,7 +122,7 @@ export default function LetterEditor({ onSent }) {
               placeholder="Re: Matters of great importance..."
               value={subject}
               onChange={(e) => setSubject(e.target.value)}
-              className="w-full px-4 md:px-6 py-3 md:py-4 bg-[#fdfbf7] border-2 border-amber-800/20 rounded-sm font-serif text-xl md:text-2xl text-amber-900 placeholder-amber-400 focus:outline-none focus:border-amber-800/40 focus:ring-4 focus:ring-amber-100 transition-all shadow-inner"
+              className="w-full px-4 md:px-6 py-3 md:py-4 bg-[#fdfbf7] border-2 border-amber-800/20 rounded-sm font-serif text-xl md:text-2xl text-amber-900 placeholder-amber-400 focus:outline-none focus:border-amber-800/40 focus:ring-2 focus:ring-amber-100 transition-all shadow-inner"
               required
             />
           </div>
@@ -150,8 +139,8 @@ export default function LetterEditor({ onSent }) {
                     key={color.id}
                     type="button"
                     onClick={() => setWaxColor(color.id)}
-                    className={`w-10 h-10 md:w-14 md:h-14 rounded-full bg-gradient-to-br ${color.class} shadow-xl transition-all border-4 ${
-                      waxColor === color.id ? 'border-amber-400 scale-110 ring-4 ring-amber-200' : 'border-white/50 opacity-80 hover:opacity-100'
+                    className={`w-10 h-10 md:w-14 md:h-14 rounded-full bg-gradient-to-br ${color.class} shadow-lg transition-all border-4 ${
+                      waxColor === color.id ? 'border-amber-400 scale-110 ring-2 ring-amber-200' : 'border-white/50'
                     }`}
                     title={color.name}
                   />
@@ -196,12 +185,12 @@ export default function LetterEditor({ onSent }) {
                 placeholder="My Dearest Friend,
 
 I take pen in hand to write to you of matters that have weighed upon my mind these past days..."
-                rows={isMobile ? 12 : 16}
-                className="w-full px-4 md:px-8 py-4 md:py-8 bg-[#fdfbf7] border-2 border-amber-800/20 rounded-sm font-body text-base md:text-xl leading-relaxed resize-none focus:outline-none focus:border-amber-800/40 focus:ring-4 focus:ring-amber-100 transition-all shadow-inner text-amber-900 placeholder-amber-300"
+                rows={isMobile ? 10 : 14}
+                className="w-full px-4 md:px-8 py-4 md:py-8 bg-[#fdfbf7] border-2 border-amber-800/20 rounded-sm font-body text-base md:text-xl leading-relaxed resize-none focus:outline-none focus:border-amber-800/40 focus:ring-2 focus:ring-amber-100 transition-all shadow-inner text-amber-900 placeholder-amber-300"
                 required
                 style={{
-                  backgroundImage: `repeating-linear-gradient(transparent, transparent ${isMobile ? '31px' : '39px'}, #e5d5b5 ${isMobile ? '31px' : '39px'}, #e5d5b5 ${isMobile ? '32px' : '40px'})`,
-                  lineHeight: isMobile ? '32px' : '40px',
+                  backgroundImage: isMobile ? 'none' : `repeating-linear-gradient(transparent, transparent 39px, #e5d5b5 39px, #e5d5b5 40px)`,
+                  lineHeight: isMobile ? '1.6' : '40px',
                   backgroundAttachment: 'local'
                 }}
               />
@@ -221,7 +210,7 @@ I take pen in hand to write to you of matters that have weighed upon my mind the
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-4 md:py-5 bg-gradient-to-r from-red-900 via-red-800 to-red-900 text-amber-50 font-serif text-xl md:text-2xl rounded-sm shadow-2xl hover:shadow-3xl transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3 md:gap-4 border-2 border-red-950 tracking-wide active:scale-95"
+            className="w-full py-4 md:py-5 bg-gradient-to-r from-red-900 via-red-800 to-red-900 text-amber-50 font-serif text-xl md:text-2xl rounded-sm shadow-lg hover:shadow-xl transition-shadow disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3 md:gap-4 border-2 border-red-950 tracking-wide"
           >
             {loading ? (
               <>
@@ -236,7 +225,7 @@ I take pen in hand to write to you of matters that have weighed upon my mind the
             )}
           </button>
         </form>
-      </motion.div>
+      </div>
     </div>
   )
 }

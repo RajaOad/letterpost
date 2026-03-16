@@ -29,7 +29,7 @@ export default function LetterView({ letter, onBack }) {
   const handleOpen = () => {
     if (!isOpen) {
       setSealBroken(true)
-      setTimeout(() => setIsOpen(true), isMobile ? 600 : 1000)
+      setTimeout(() => setIsOpen(true), isMobile ? 400 : 800)
     }
   }
 
@@ -75,7 +75,7 @@ export default function LetterView({ letter, onBack }) {
       <div className="max-w-2xl mx-auto px-4 pb-8">
         <button
           onClick={onBack}
-          className="mb-8 flex items-center gap-3 text-amber-900 hover:text-red-900 transition-colors font-serif group"
+          className="mb-6 md:mb-8 flex items-center gap-3 text-amber-900 hover:text-red-900 transition-colors font-serif group"
         >
           <div className="p-2 bg-amber-100 rounded-full group-hover:bg-red-100 transition-colors border border-amber-300">
             <ArrowLeft className="w-5 h-5" />
@@ -83,68 +83,65 @@ export default function LetterView({ letter, onBack }) {
           <span className="text-lg">Return to Post Office</span>
         </button>
 
-        <div className="bg-gradient-to-b from-amber-100 via-amber-50 to-amber-100 rounded-sm shadow-2xl border-4 border-amber-800/20 p-12 text-center relative overflow-hidden">
-          <div className="absolute inset-0 opacity-30" style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='300' height='300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.4'/%3E%3C/svg%3E")`
-          }}></div>
+        <div className="bg-gradient-to-b from-amber-100 via-amber-50 to-amber-100 rounded-sm shadow-2xl border-4 border-amber-800/20 p-8 md:p-12 text-center relative overflow-hidden">
+          {/* NO SVG noise on mobile */}
+          {!isMobile && (
+            <div className="absolute inset-0 opacity-30" style={{
+              backgroundImage: `url("data:image/svg+xml,%3Csvg width='300' height='300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.4'/%3E%3C/svg%3E")`
+            }}></div>
+          )}
 
-          <motion.div
-            animate={isMobile ? {} : { y: [0, -20, 0], rotate: [0, 3, -3, 0] }}
-            transition={isMobile ? {} : { duration: 5, repeat: Infinity, ease: "easeInOut" }}
-            className="relative z-10 mb-10"
-          >
-            <div className="w-40 h-40 mx-auto relative">
-              <div className="absolute inset-0 bg-gradient-to-br from-amber-300 to-amber-400 rounded-lg shadow-2xl transform rotate-6"></div>
-              <div className="absolute inset-0 bg-gradient-to-br from-amber-200 to-amber-300 rounded-lg shadow-xl flex items-center justify-center">
-                <motion.div animate={isMobile ? {} : { scale: [1, 1.1, 1] }} transition={isMobile ? {} : { duration: 2, repeat: Infinity }}>
-                  {isSender ? (
-                    <Send className="w-16 h-16 text-amber-800" />
-                  ) : (
-                    <Clock className="w-16 h-16 text-amber-800" />
-                  )}
-                </motion.div>
+          <div className="relative z-10 mb-8 md:mb-10">
+            <div className="w-32 h-32 md:w-40 md:h-40 mx-auto relative">
+              <div className="absolute inset-0 bg-gradient-to-br from-amber-300 to-amber-400 rounded-lg shadow-xl transform rotate-6"></div>
+              <div className="absolute inset-0 bg-gradient-to-br from-amber-200 to-amber-300 rounded-lg shadow-lg flex items-center justify-center">
+                {isSender ? (
+                  <Send className="w-12 h-12 md:w-16 md:h-16 text-amber-800" />
+                ) : (
+                  <Clock className="w-12 h-12 md:w-16 md:h-16 text-amber-800" />
+                )}
               </div>
             </div>
-          </motion.div>
+          </div>
 
           <div className="relative z-10">
-            <h2 className="font-serif text-5xl text-amber-950 mb-6 font-bold">
+            <h2 className="font-serif text-3xl md:text-5xl text-amber-950 mb-4 md:mb-6 font-bold">
               {isSender ? 'Dispatched' : 'En Route'}
             </h2>
-            <p className="font-body text-xl text-amber-800 mb-4 leading-relaxed">
+            <p className="font-body text-lg md:text-xl text-amber-800 mb-4 leading-relaxed">
               {isSender ? (
                 <>
-                  Your letter to <span className="font-serif text-3xl text-red-900 font-bold mx-2">{letter.recipient?.display_name}</span><br/>
+                  Your letter to <span className="font-serif text-2xl md:text-3xl text-red-900 font-bold mx-1 md:mx-2">{letter.recipient?.display_name}</span><br className="hidden md:block"/>
                   is journeying to its destination.
                 </>
               ) : (
                 <>
-                  A sealed letter from <span className="font-serif text-3xl text-red-900 font-bold mx-2">{letter.sender?.display_name}</span><br/>
+                  A sealed letter from <span className="font-serif text-2xl md:text-3xl text-red-900 font-bold mx-1 md:mx-2">{letter.sender?.display_name}</span><br className="hidden md:block"/>
                   is journeying to your estate.
                 </>
               )}
             </p>
             
-            <div className="my-10 p-8 bg-gradient-to-b from-amber-200/50 to-amber-100/50 rounded-sm border-2 border-amber-800/20 inline-block shadow-inner">
-              <div className="flex items-center justify-center gap-3 text-amber-900 mb-3">
-                <MapPin className="w-6 h-6" />
-                <span className="font-serif text-xl tracking-wider">
+            <div className="my-6 md:my-10 p-4 md:p-8 bg-gradient-to-b from-amber-200/50 to-amber-100/50 rounded-sm border-2 border-amber-800/20 inline-block shadow-inner">
+              <div className="flex items-center justify-center gap-2 md:gap-3 text-amber-900 mb-2 md:mb-3">
+                <MapPin className="w-5 h-5 md:w-6 md:h-6" />
+                <span className="font-serif text-lg md:text-xl tracking-wider">
                   {isSender ? 'EXPECTED DELIVERY' : 'EXPECTED ARRIVAL'}
                 </span>
               </div>
-              <p className="font-serif text-4xl text-amber-950 font-bold mb-2">
+              <p className="font-serif text-2xl md:text-4xl text-amber-950 font-bold mb-1 md:mb-2">
                 {format(deliveryTime, 'MMMM d')}
               </p>
-              <p className="font-body text-2xl text-amber-800">
+              <p className="font-body text-lg md:text-2xl text-amber-800">
                 {format(deliveryTime, 'h:mm a')} • {format(deliveryTime, 'yyyy')}
               </p>
             </div>
 
-            <div className="mt-10 pt-8 border-t-2 border-amber-800/10">
-              <p className="font-script text-4xl text-amber-900 mb-3">
+            <div className="mt-6 md:mt-10 pt-6 md:pt-8 border-t-2 border-amber-800/10">
+              <p className="font-script text-2xl md:text-4xl text-amber-900 mb-2 md:mb-3">
                 {isSender ? '"The waiting is the hardest part"' : '"Patience is bitter, but its fruit is sweet"'}
               </p>
-              <p className="font-body text-amber-700 italic">
+              <p className="font-body text-sm md:text-base text-amber-700 italic">
                 {isSender ? '— Tom Petty' : '— Aristotle'}
               </p>
             </div>
@@ -158,21 +155,17 @@ export default function LetterView({ letter, onBack }) {
     <div className="max-w-4xl mx-auto pb-12 px-4">
       {/* Error Message */}
       {deleteError && (
-        <motion.div 
-          initial={isMobile ? false : { opacity: 0, y: -20 }}
-          animate={isMobile ? false : { opacity: 1, y: 0 }}
-          className="mb-6 p-4 bg-red-100 border-2 border-red-800/20 rounded-sm text-red-900 font-body flex items-center gap-3"
-        >
-          <AlertCircle className="w-5 h-5 flex-shrink-0" />
+        <div className="mb-6 p-4 bg-red-100 border-2 border-red-800/20 rounded-sm text-red-900 font-body flex items-center gap-3">
+          <AlertCircle className="w-5 h-5 shrink-0" />
           <span>Error: {deleteError}</span>
           <button onClick={() => setDeleteError(null)} className="ml-auto p-1 hover:bg-red-200 rounded">
             <X className="w-4 h-4" />
           </button>
-        </motion.div>
+        </div>
       )}
 
       {/* Header Controls */}
-      <div className="flex justify-between items-center mb-8">
+      <div className="flex justify-between items-center mb-6 md:mb-8">
         <button
           onClick={onBack}
           className="flex items-center gap-3 text-amber-900 hover:text-red-900 transition-colors font-serif group"
@@ -186,19 +179,15 @@ export default function LetterView({ letter, onBack }) {
         {canDelete && (
           <div className="flex gap-3">
             {showBurnConfirm ? (
-              <motion.div 
-                initial={isMobile ? false : { scale: 0.8, opacity: 0 }}
-                animate={isMobile ? false : { scale: 1, opacity: 1 }}
-                className="flex items-center gap-3 bg-red-100 border-2 border-red-800/20 rounded-sm px-4 py-3 shadow-lg"
-              >
+              <div className="flex items-center gap-3 bg-red-100 border-2 border-red-800/20 rounded-sm px-4 py-3 shadow-lg">
                 <Flame className="w-5 h-5 text-red-800 animate-pulse" />
-                <span className="font-body text-red-900 font-bold">Burn this letter?</span>
+                <span className="font-body text-red-900 font-bold">Burn?</span>
                 <button
                   onClick={handleDelete}
                   disabled={isDeleting}
                   className="px-4 py-2 bg-red-900 text-amber-100 rounded-sm font-body text-sm hover:bg-red-950 transition-colors disabled:opacity-50 font-bold"
                 >
-                  {isDeleting ? 'Burning...' : 'Yes, Burn'}
+                  {isDeleting ? 'Burning...' : 'Yes'}
                 </button>
                 <button
                   onClick={() => setShowBurnConfirm(false)}
@@ -207,17 +196,15 @@ export default function LetterView({ letter, onBack }) {
                 >
                   <X className="w-5 h-5 text-red-800" />
                 </button>
-              </motion.div>
+              </div>
             ) : (
-              <motion.button
-                whileHover={isMobile ? {} : { scale: 1.05 }}
-                whileTap={isMobile ? {} : { scale: 0.95 }}
+              <button
                 onClick={() => setShowBurnConfirm(true)}
                 className="flex items-center gap-2 px-5 py-3 bg-amber-100 text-amber-900 rounded-sm hover:bg-red-100 hover:text-red-900 transition-all font-body border-2 border-amber-800/20 hover:border-red-800/40 shadow-md group"
               >
-                <Flame className="w-5 h-5 group-hover:animate-pulse" />
+                <Flame className="w-5 h-5" />
                 <span className="font-bold">Burn Letter</span>
-              </motion.button>
+              </button>
             )}
           </div>
         )}
@@ -227,16 +214,20 @@ export default function LetterView({ letter, onBack }) {
         {!isOpen ? (
           <motion.div
             key="envelope"
-            initial={isMobile ? false : { scale: 0.9, opacity: 0 }}
+            initial={isMobile ? false : { scale: 0.95, opacity: 0 }}
             animate={isMobile ? false : { scale: 1, opacity: 1 }}
-            exit={isMobile ? { opacity: 0 } : { scale: 1.1, opacity: 0, rotateY: 15 }}
+            exit={isMobile ? { opacity: 0 } : { scale: 1.05, opacity: 0 }}
+            transition={isMobile ? {} : { duration: 0.3 }}
             className="relative cursor-pointer max-w-2xl mx-auto"
             onClick={handleOpen}
           >
             <div className="bg-gradient-to-br from-amber-200 via-amber-100 to-amber-200 rounded-sm shadow-2xl border-4 border-amber-800/20 aspect-[1.5/1] flex flex-col items-center justify-center relative overflow-hidden group">
-              <div className="absolute inset-0 opacity-60" style={{
-                backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.5'/%3E%3C/svg%3E")`
-              }}></div>
+              {/* NO SVG noise on mobile */}
+              {!isMobile && (
+                <div className="absolute inset-0 opacity-40" style={{
+                  backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.5'/%3E%3C/svg%3E")`
+                }}></div>
+              )}
 
               <div className="absolute top-0 left-0 right-0 h-[60%] bg-gradient-to-b from-amber-300 to-amber-200 transform origin-top shadow-inner"
                    style={{ clipPath: 'polygon(0 0, 50% 100%, 100% 0)' }}></div>
@@ -248,118 +239,96 @@ export default function LetterView({ letter, onBack }) {
 
               <div className="absolute top-[60%] left-0 right-0 h-px bg-amber-800/20"></div>
 
-              <motion.div 
-                className={`relative z-10 w-32 h-32 rounded-full bg-gradient-to-br ${waxColors[letter.wax_color || 'red']} shadow-2xl flex items-center justify-center border-4 border-white/30`}
-                animate={sealBroken ? { 
-                  scale: [1, 1.4, 0], 
-                  rotate: [0, 15, -15, 0],
-                  opacity: [1, 0.9, 0] 
-                } : isMobile ? {} : {
-                  scale: [1, 1.05, 1],
-                  rotate: [0, 3, -3, 0],
-                  boxShadow: [
-                    '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
-                    '0 35px 60px -12px rgba(0, 0, 0, 0.4)',
-                    '0 25px 50px -12px rgba(0, 0, 0, 0.25)'
-                  ]
-                }}
-                transition={sealBroken ? { duration: 1 } : isMobile ? {} : { duration: 3, repeat: Infinity }}
+              <div 
+                className={`relative z-10 w-28 h-28 md:w-32 md:h-32 rounded-full bg-gradient-to-br ${waxColors[letter.wax_color || 'red']} shadow-2xl flex items-center justify-center border-4 border-white/30 transition-all duration-500 ${sealBroken ? 'scale-0 opacity-0' : 'scale-100 opacity-100'}`}
               >
-                <span className="font-serif text-5xl text-amber-100 font-bold drop-shadow-2xl">
+                <span className="font-serif text-4xl md:text-5xl text-amber-100 font-bold drop-shadow-lg">
                   {letter.sender?.display_name?.[0] || 'S'}
                 </span>
-              </motion.div>
-
-              <motion.div 
-                className="relative z-10 mt-10 text-center"
-                animate={sealBroken ? { opacity: 0, y: 20 } : { opacity: 1, y: 0 }}
-                transition={{ duration: 0.3 }}
-              >
-                <p className="font-script text-4xl text-amber-900 mb-3">Break the Seal</p>
-                <div className="w-16 h-1 bg-amber-800/30 mx-auto mb-3"></div>
-                <p className="font-body text-amber-700 text-sm tracking-[0.3em] uppercase">Click to Open</p>
-              </motion.div>
-
-              <div className="absolute bottom-8 left-8 right-8 flex justify-between items-end z-10">
-                <div className="text-left bg-amber-100/90 backdrop-blur-sm p-3 rounded-sm border border-amber-800/20 shadow-lg">
-                  <p className="font-body text-xs text-amber-700 uppercase tracking-wider mb-1">From</p>
-                  <p className="font-serif text-lg text-amber-950 font-bold">{letter.sender?.display_name}</p>
-                </div>
-                <div className="text-right bg-amber-100/90 backdrop-blur-sm p-3 rounded-sm border border-amber-800/20 shadow-lg">
-                  <p className="font-body text-xs text-amber-700 uppercase tracking-wider mb-1">Date Penned</p>
-                  <p className="font-serif text-lg text-amber-950 font-bold">{format(new Date(letter.created_at), 'MMM d, yyyy')}</p>
-                </div>
               </div>
 
-              <div className="absolute top-4 left-4 w-8 h-8 border-t-2 border-l-2 border-amber-800/30"></div>
-              <div className="absolute top-4 right-4 w-8 h-8 border-t-2 border-r-2 border-amber-800/30"></div>
-              <div className="absolute bottom-4 left-4 w-8 h-8 border-b-2 border-l-2 border-amber-800/30"></div>
-              <div className="absolute bottom-4 right-4 w-8 h-8 border-b-2 border-r-2 border-amber-800/30"></div>
+              <div className={`relative z-10 mt-8 md:mt-10 text-center transition-opacity duration-300 ${sealBroken ? 'opacity-0' : 'opacity-100'}`}>
+                <p className="font-script text-3xl md:text-4xl text-amber-900 mb-2 md:mb-3">Break the Seal</p>
+                <div className="w-12 md:w-16 h-1 bg-amber-800/30 mx-auto mb-2 md:mb-3"></div>
+                <p className="font-body text-amber-700 text-xs md:text-sm tracking-[0.2em] uppercase">Click to Open</p>
+              </div>
+
+              <div className="absolute bottom-6 md:bottom-8 left-6 md:left-8 right-6 md:right-8 flex justify-between items-end z-10">
+                <div className="text-left bg-amber-100/90 backdrop-blur-sm p-2 md:p-3 rounded-sm border border-amber-800/20 shadow-lg">
+                  <p className="font-body text-xs text-amber-700 uppercase tracking-wider mb-0.5">From</p>
+                  <p className="font-serif text-sm md:text-lg text-amber-950 font-bold">{letter.sender?.display_name}</p>
+                </div>
+                <div className="text-right bg-amber-100/90 backdrop-blur-sm p-2 md:p-3 rounded-sm border border-amber-800/20 shadow-lg">
+                  <p className="font-body text-xs text-amber-700 uppercase tracking-wider mb-0.5">Date Penned</p>
+                  <p className="font-serif text-sm md:text-lg text-amber-950 font-bold">{format(new Date(letter.created_at), 'MMM d, yyyy')}</p>
+                </div>
+              </div>
             </div>
           </motion.div>
         ) : (
           <motion.div
             key="letter"
-            initial={isMobile ? false : { opacity: 0, y: 100, rotateX: -15 }}
-            animate={isMobile ? false : { opacity: 1, y: 0, rotateX: 0 }}
-            transition={isMobile ? {} : { duration: 1, ease: [0.4, 0, 0.2, 1] }}
-            style={isMobile ? {} : { perspective: '1000px' }}
+            initial={isMobile ? false : { opacity: 0, y: 50 }}
+            animate={isMobile ? false : { opacity: 1, y: 0 }}
+            transition={isMobile ? {} : { duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
           >
-            <div className="bg-[#f8f6f1] rounded-sm shadow-2xl border border-amber-900/10 min-h-[800px] relative overflow-hidden">
-              <div className="absolute inset-0 opacity-40 pointer-events-none" style={{
-                backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='paper'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.04' numOctaves='5' /%3E%3CfeDiffuseLighting lighting-color='#f8f6f1' surfaceScale='2'%3E%3CfeDistantLight azimuth='45' elevation='60' /%3E%3C/feDiffuseLighting%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23paper)' /%3E%3C/svg%3E")`
-              }}></div>
+            <div className="bg-[#f8f6f1] rounded-sm shadow-2xl border border-amber-900/10 min-h-[600px] md:min-h-[800px] relative overflow-hidden">
+              {/* NO paper SVG on mobile */}
+              {!isMobile && (
+                <div className="absolute inset-0 opacity-30 pointer-events-none" style={{
+                  backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='paper'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.04' numOctaves='3' /%3E%3CfeDiffuseLighting lighting-color='#f8f6f1' surfaceScale='2'%3E%3CfeDistantLight azimuth='45' elevation='60' /%3E%3C/feDiffuseLighting%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23paper)' /%3E%3C/svg%3E")`
+                }}></div>
+              )}
 
-              <div className="absolute top-32 right-20 w-24 h-24 rounded-full bg-amber-900/5 blur-2xl pointer-events-none"></div>
-              <div className="absolute bottom-48 left-16 w-32 h-32 rounded-full bg-amber-800/5 blur-3xl pointer-events-none"></div>
-              <div className="absolute top-1/2 right-1/4 w-16 h-16 rounded-full bg-amber-900/3 blur-xl pointer-events-none"></div>
+              <div className="absolute top-24 md:top-32 right-16 md:right-20 w-16 h-16 md:w-24 md:h-24 rounded-full bg-amber-900/5 blur-2xl pointer-events-none"></div>
+              <div className="absolute bottom-32 md:bottom-48 left-12 md:left-16 w-24 h-24 md:w-32 md:h-32 rounded-full bg-amber-800/5 blur-3xl pointer-events-none"></div>
 
-              <div className="relative z-10 p-12 md:p-20">
-                <div className="flex justify-between items-start mb-16 pb-8 border-b-2 border-amber-900/20">
+              <div className="relative z-10 p-6 md:p-12 lg:p-20">
+                <div className="flex flex-col md:flex-row justify-between items-start mb-8 md:mb-16 pb-6 md:pb-8 border-b-2 border-amber-900/20 gap-4">
                   <div className="space-y-2">
-                    <div className="flex items-center gap-3 text-amber-800/70 mb-4">
-                      <Feather className="w-5 h-5" />
-                      <span className="font-body text-xs uppercase tracking-[0.3em] font-bold">Private Correspondence</span>
+                    <div className="flex items-center gap-2 md:gap-3 text-amber-800/70 mb-2 md:mb-4">
+                      <Feather className="w-4 h-4 md:w-5 md:h-5" />
+                      <span className="font-body text-xs uppercase tracking-[0.2em] font-bold">Private Correspondence</span>
                     </div>
                     <div className="space-y-1">
-                      <p className="font-body text-sm text-amber-700 italic">From the hand of</p>
-                      <h3 className="font-serif text-4xl text-amber-950 font-bold tracking-wide">{letter.sender?.display_name}</h3>
-                      <p className="font-body text-amber-600">@{letter.sender?.username}</p>
+                      <p className="font-body text-xs md:text-sm text-amber-700 italic">From the hand of</p>
+                      <h3 className="font-serif text-2xl md:text-4xl text-amber-950 font-bold tracking-wide">{letter.sender?.display_name}</h3>
+                      <p className="font-body text-amber-600 text-sm">@{letter.sender?.username}</p>
                     </div>
                   </div>
                   
-                  <div className="text-right space-y-3">
-                    <div className="inline-flex items-center gap-2 px-4 py-2 bg-amber-100/50 rounded-sm border border-amber-800/20">
+                  <div className="text-left md:text-right space-y-2 md:space-y-3">
+                    <div className="inline-flex items-center gap-2 px-3 md:px-4 py-2 bg-amber-100/50 rounded-sm border border-amber-800/20">
                       <Calendar className="w-4 h-4 text-amber-700" />
                       <div>
                         <p className="font-body text-xs text-amber-600 uppercase tracking-wider">Date Composed</p>
-                        <p className="font-serif text-lg text-amber-950 font-bold">
+                        <p className="font-serif text-base md:text-lg text-amber-950 font-bold">
                           {format(new Date(letter.created_at), 'MMMM d, yyyy')}
                         </p>
                       </div>
                     </div>
-                    <p className="font-body text-amber-600 text-sm">
+                    <p className="font-body text-amber-600 text-xs md:text-sm">
                       {format(new Date(letter.created_at), 'h:mm a')}
                     </p>
                   </div>
                 </div>
 
-                <div className="mb-12">
-                  <p className="font-body text-xs text-amber-600 uppercase tracking-[0.3em] mb-3 font-bold">Regarding</p>
-                  <h1 className="font-serif text-5xl md:text-6xl text-amber-950 leading-tight font-bold tracking-tight">
+                <div className="mb-8 md:mb-12">
+                  <p className="font-body text-xs text-amber-600 uppercase tracking-[0.2em] mb-2 md:mb-3 font-bold">Regarding</p>
+                  <h1 className="font-serif text-3xl md:text-5xl lg:text-6xl text-amber-950 leading-tight font-bold tracking-tight">
                     {letter.subject}
                   </h1>
-                  <div className="w-24 h-1 bg-amber-800/30 mt-6"></div>
+                  <div className="w-16 md:w-24 h-1 bg-amber-800/30 mt-4 md:mt-6"></div>
                 </div>
 
-                <div className="space-y-8 text-justify">
+                <div className="space-y-4 md:space-y-8 text-justify">
                   {letter.content.split('\n').map((paragraph, idx) => (
                     paragraph.trim() && (
                       <p 
                         key={idx} 
-                        className="font-body text-xl text-amber-950 leading-loose first-letter:text-6xl first-letter:font-serif first-letter:float-left first-letter:mr-4 first-letter:mt-[-8px] first-letter:text-red-900"
+                        className="font-body text-base md:text-xl text-amber-950 leading-relaxed first-letter:text-4xl md:first-letter:text-6xl first-letter:font-serif first-letter:float-left first-letter:mr-2 md:first-letter:mr-4 first-letter:-mt-1 md:first-letter:-mt-2 first-letter:text-red-900"
                         style={{ 
-                          textIndent: idx === 0 ? '0' : '2rem',
+                          textIndent: idx === 0 ? '0' : '1.5rem',
                         }}
                       >
                         {paragraph}
@@ -368,23 +337,23 @@ export default function LetterView({ letter, onBack }) {
                   ))}
                 </div>
 
-                <div className="mt-20 pt-12 border-t-2 border-amber-900/10">
-                  <p className="font-script text-5xl text-amber-900 mb-6 transform -rotate-2">With warm regards,</p>
+                <div className="mt-12 md:mt-20 pt-8 md:pt-12 border-t-2 border-amber-900/10">
+                  <p className="font-script text-3xl md:text-5xl text-amber-900 mb-4 md:mb-6 transform -rotate-2">With warm regards,</p>
                   
-                  <div className="flex items-center gap-6 mt-8">
-                    <div className={`w-20 h-20 rounded-full bg-gradient-to-br ${waxColors[letter.wax_color || 'red']} flex items-center justify-center shadow-xl transform rotate-12 border-4 border-white/50`}>
-                      <span className="font-serif text-3xl text-amber-100 font-bold">
+                  <div className="flex items-center gap-4 md:gap-6 mt-6 md:mt-8">
+                    <div className={`w-14 h-14 md:w-20 md:h-20 rounded-full bg-gradient-to-br ${waxColors[letter.wax_color || 'red']} flex items-center justify-center shadow-xl transform rotate-12 border-4 border-white/50`}>
+                      <span className="font-serif text-xl md:text-3xl text-amber-100 font-bold">
                         {letter.sender?.display_name?.[0]}
                       </span>
                     </div>
                     <div>
-                      <p className="font-serif text-3xl text-amber-950 font-bold">{letter.sender?.display_name}</p>
-                      <p className="font-body text-amber-600 italic mt-1">Correspondent • Slow Letters Society</p>
+                      <p className="font-serif text-xl md:text-3xl text-amber-950 font-bold">{letter.sender?.display_name}</p>
+                      <p className="font-body text-amber-600 italic mt-1 text-sm md:text-base">Correspondent • Slow Letters Society</p>
                     </div>
                   </div>
                 </div>
 
-                <div className="mt-16 pt-8 border-t border-amber-900/10 flex justify-between items-center text-xs font-body text-amber-500/60">
+                <div className="mt-12 md:mt-16 pt-6 md:pt-8 border-t border-amber-900/10 flex flex-col md:flex-row justify-between items-start md:items-center gap-2 text-xs font-body text-amber-500/60">
                   <div className="flex items-center gap-2">
                     <div className="w-2 h-2 rounded-full bg-amber-800/30"></div>
                     <span>Sealed with wax • Delivered with care</span>
@@ -393,8 +362,12 @@ export default function LetterView({ letter, onBack }) {
                 </div>
               </div>
 
-              <div className="absolute top-8 left-8 right-8 bottom-8 border border-amber-900/5 pointer-events-none"></div>
-              <div className="absolute top-12 left-12 right-12 bottom-12 border border-amber-900/5 pointer-events-none"></div>
+              {!isMobile && (
+                <>
+                  <div className="absolute top-8 left-8 right-8 bottom-8 border border-amber-900/5 pointer-events-none"></div>
+                  <div className="absolute top-12 left-12 right-12 bottom-12 border border-amber-900/5 pointer-events-none"></div>
+                </>
+              )}
             </div>
           </motion.div>
         )}
