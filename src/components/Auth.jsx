@@ -33,7 +33,7 @@ export default function Auth() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-amber-100 relative overflow-hidden">
+    <div className="min-h-screen flex items-center justify-center bg-amber-100 relative overflow-hidden pd-y2">
       {/* Background effects - desktop only */}
       {!isMobile && (
         <>
@@ -45,7 +45,7 @@ export default function Auth() {
         </>
       )}
 
-      <div className="w-full max-w-md relative z-10 p-4">
+      <div className="w-full max-w-md relative z-10 p-4 pd-x">
         {/* Header */}
         <div className="text-center mb-6 md:mb-8">
           <div className="w-20 h-20 md:w-28 md:h-28 mx-auto mb-4 md:mb-6 rounded-full bg-linear-to-br from-red-800 via-red-700 to-red-900 flex items-center justify-center shadow-xl border-4 border-amber-200">
@@ -68,7 +68,7 @@ export default function Auth() {
           <div className="flex border-b-2 border-amber-300 relative">
             <button
               onClick={() => setIsLogin(true)}
-              className={`flex-1 py-3 md:py-4 font-serif text-base md:text-lg transition-all relative ${
+              className={`flex-1 py-3 pd-xy md:py-4 font-serif text-base md:text-lg transition-all relative ${
                 isLogin 
                   ? 'bg-amber-200 text-amber-950 font-bold' 
                   : 'text-amber-700 hover:bg-amber-100/50'
@@ -79,7 +79,7 @@ export default function Auth() {
             </button>
             <button
               onClick={() => setIsLogin(false)}
-              className={`flex-1 py-3 md:py-4 font-serif text-base md:text-lg transition-all relative ${
+              className={`flex-1 py-3 pd-xy md:py-4 font-serif text-base md:text-lg transition-all relative ${
                 !isLogin 
                   ? 'bg-amber-200 text-amber-950 font-bold' 
                   : 'text-amber-700 hover:bg-amber-100/50'
@@ -94,24 +94,24 @@ export default function Auth() {
             {!isLogin && (
               <div className="space-y-4">
                 <div className="relative">
-                  <User className="absolute left-4 top-3.5 w-5 h-5 text-amber-600" />
+                  <User className="absolute left-0 top-3.5 w-5 h-5 text-amber-600" />
                   <input
                     type="text"
                     placeholder="Username"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
-                    className="w-full pl-12 pr-4 py-3 bg-[#fdfbf7] border-2 border-amber-300 rounded-sm font-body text-amber-900 placeholder-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200 focus:border-amber-500 transition-all"
+                    className="w-full pl-12 pr-4 py-3 pd-xy bg-[#fdfbf7] border-2 border-amber-300 rounded-sm font-body text-amber-900 placeholder-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200 focus:border-amber-500 transition-all"
                     required
                   />
                 </div>
                 <div className="relative">
-                  <Feather className="absolute left-4 top-3.5 w-5 h-5 text-amber-600" />
+                  <Feather className="absolute left-0 top-3.5 w-5 h-5 text-amber-600" />
                   <input
                     type="text"
                     placeholder="Display Name"
                     value={displayName}
                     onChange={(e) => setDisplayName(e.target.value)}
-                    className="w-full pl-12 pr-4 py-3 bg-[#fdfbf7] border-2 border-amber-300 rounded-sm font-body text-amber-900 placeholder-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200 focus:border-amber-500 transition-all"
+                    className="w-full pl-12 pr-4 py-3 pd-xy bg-[#fdfbf7] border-2 border-amber-300 rounded-sm font-body text-amber-900 placeholder-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200 focus:border-amber-500 transition-all"
                     required
                   />
                 </div>
@@ -119,25 +119,25 @@ export default function Auth() {
             )}
 
             <div className="relative">
-              <Mail className="absolute left-4 top-3.5 w-5 h-5 text-amber-600" />
+              <Mail className="absolute left-0 top-3.5 w-5 h-5 text-amber-600" />
               <input
                 type="email"
                 placeholder="Email address"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full pl-12 pr-4 py-3 bg-[#fdfbf7] border-2 border-amber-300 rounded-sm font-body text-amber-900 placeholder-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200 focus:border-amber-500 transition-all"
+                className="w-full pl-12 pr-4 py-3 pd-xy bg-[#fdfbf7] border-2 border-amber-300 rounded-sm font-body text-amber-900 placeholder-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200 focus:border-amber-500 transition-all"
                 required
               />
             </div>
 
             <div className="relative">
-              <Lock className="absolute left-4 top-3.5 w-5 h-5 text-amber-600" />
+              <Lock className="absolute left-0 top-3.5 w-5 h-5 text-amber-600" />
               <input
                 type="password"
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full pl-12 pr-4 py-3 bg-[#fdfbf7] border-2 border-amber-300 rounded-sm font-body text-amber-900 placeholder-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200 focus:border-amber-500 transition-all"
+                className="w-full pl-12 pr-4 py-3 pd-xy bg-[#fdfbf7] border-2 border-amber-300 rounded-sm font-body text-amber-900 placeholder-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200 focus:border-amber-500 transition-all"
                 required
               />
             </div>
@@ -152,7 +152,7 @@ export default function Auth() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-3 md:py-4 bg-linear-to-r from-red-900 via-red-800 to-red-900 text-amber-100 font-serif text-lg md:text-xl rounded-sm hover:shadow-lg transition-shadow disabled:opacity-50 disabled:cursor-not-allowed border-2 border-red-950 font-bold tracking-wide"
+              className="w-full py-3 pd-xy md:py-4 bg-linear-to-r from-red-900 via-red-800 to-red-900 text-amber-100 font-serif text-lg md:text-xl rounded-sm hover:shadow-lg transition-shadow disabled:opacity-50 disabled:cursor-not-allowed border-2 border-red-950 font-bold tracking-wide"
             >
               {loading ? 'Sealing envelope...' : isLogin ? 'Open Mailbox' : 'Create Account'}
             </button>

@@ -84,7 +84,6 @@ export default function LetterView({ letter, onBack }) {
         </button>
 
         <div className="bg-linear-to-b from-amber-100 via-amber-50 to-amber-100 rounded-sm shadow-2xl border-4 border-amber-800/20 p-8 md:p-12 text-center relative overflow-hidden">
-          {/* NO SVG noise on mobile */}
           {!isMobile && (
             <div className="absolute inset-0 opacity-30" style={{
               backgroundImage: `url("data:image/svg+xml,%3Csvg width='300' height='300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.4'/%3E%3C/svg%3E")`
@@ -152,7 +151,7 @@ export default function LetterView({ letter, onBack }) {
   }
 
   return (
-    <div className="max-w-4xl mx-auto pb-12 px-4">
+    <div className="max-w-4xl mx-auto pb-12 px-4 mauto">
       {/* Error Message */}
       {deleteError && (
         <div className="mb-6 p-4 bg-red-100 border-2 border-red-800/20 rounded-sm text-red-900 font-body flex items-center gap-3">
@@ -165,7 +164,7 @@ export default function LetterView({ letter, onBack }) {
       )}
 
       {/* Header Controls */}
-      <div className="flex justify-between items-center mb-6 md:mb-8">
+      <div className="flex justify-between items-center mb-6 md:mb-8 pd-xy">
         <button
           onClick={onBack}
           className="flex items-center gap-3 text-amber-900 hover:text-red-900 transition-colors font-serif group"
@@ -218,11 +217,10 @@ export default function LetterView({ letter, onBack }) {
             animate={isMobile ? false : { scale: 1, opacity: 1 }}
             exit={isMobile ? { opacity: 0 } : { scale: 1.05, opacity: 0 }}
             transition={isMobile ? {} : { duration: 0.3 }}
-            className="relative cursor-pointer max-w-2xl mx-auto"
+            className="relative cursor-pointer max-w-2xl mx-auto pd-xy2 mauto"
             onClick={handleOpen}
           >
             <div className="bg-linear-to-br from-amber-200 via-amber-100 to-amber-200 rounded-sm shadow-2xl border-4 border-amber-800/20 aspect-[1.5/1] flex flex-col items-center justify-center relative overflow-hidden group">
-              {/* NO SVG noise on mobile */}
               {!isMobile && (
                 <div className="absolute inset-0 opacity-40" style={{
                   backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.5'/%3E%3C/svg%3E")`
@@ -271,9 +269,9 @@ export default function LetterView({ letter, onBack }) {
             initial={isMobile ? false : { opacity: 0, y: 50 }}
             animate={isMobile ? false : { opacity: 1, y: 0 }}
             transition={isMobile ? {} : { duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
+            className='pd-y'
           >
-            <div className="bg-[#f8f6f1] rounded-sm shadow-2xl border border-amber-900/10 min-h-[600px] md:min-h-[800px] relative overflow-hidden">
-              {/* NO paper SVG on mobile */}
+            <div className="bg-[#f8f6f1] rounded-sm shadow-2xl border border-amber-900/10 min-h-[600px] md:min-h-[800px] relative overflow-hidden pd-xy2">
               {!isMobile && (
                 <div className="absolute inset-0 opacity-30 pointer-events-none" style={{
                   backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='paper'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.04' numOctaves='3' /%3E%3CfeDiffuseLighting lighting-color='#f8f6f1' surfaceScale='2'%3E%3CfeDistantLight azimuth='45' elevation='60' /%3E%3C/feDiffuseLighting%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23paper)' /%3E%3C/svg%3E")`
@@ -321,14 +319,17 @@ export default function LetterView({ letter, onBack }) {
                   <div className="w-16 md:w-24 h-1 bg-amber-800/30 mt-4 md:mt-6"></div>
                 </div>
 
-                <div className="space-y-4 md:space-y-8 text-justify">
+                {/* CLEAN LETTER CONTENT - No drop caps, consistent spacing */}
+                <div className="space-y-6 md:space-y-8 pd-xy2">
                   {letter.content.split('\n').map((paragraph, idx) => (
                     paragraph.trim() && (
                       <p 
                         key={idx} 
-                        className="font-body text-base md:text-xl text-amber-950 leading-relaxed first-letter:text-4xl md:first-letter:text-6xl first-letter:font-serif first-letter:float-left first-letter:mr-2 md:first-letter:mr-4 first-letter:-mt-1 md:first-letter:-mt-2 first-letter:text-red-900"
+                        className="font-body text-base md:text-xl text-amber-950 leading-relaxed text-justify"
                         style={{ 
-                          textIndent: idx === 0 ? '0' : '1.5rem',
+                          textIndent: '0',
+                          marginBottom: '1.5rem',
+                          lineHeight: '1.8'
                         }}
                       >
                         {paragraph}

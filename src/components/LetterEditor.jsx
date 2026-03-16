@@ -75,7 +75,7 @@ export default function LetterEditor({ onSent }) {
   }
 
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-8">
+    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-8 pd-y mauto">
       <div className="bg-amber-50 rounded-sm shadow-2xl border-2 border-amber-800/20 overflow-hidden relative">
         <div className="bg-linear-to-r from-amber-200 via-amber-100 to-amber-200 px-4 md:px-8 py-6 md:py-8 border-b-2 border-amber-800/20 relative">
           <div className="flex items-center gap-3 md:gap-5">
@@ -89,8 +89,8 @@ export default function LetterEditor({ onSent }) {
           </div>
         </div>
 
-        <form onSubmit={handleSubmit} className="p-4 md:p-8 lg:p-12 space-y-6 md:space-y-10 relative">
-          <div className="space-y-3">
+        <form onSubmit={handleSubmit} className="p-4 md:p-8 lg:p-12 space-y-6 md:space-y-10 relative pd-xy2">
+          <div className="space-y-3 mr-b">
             <label className="font-serif text-xs md:text-sm text-amber-900 uppercase tracking-[0.2em] font-bold flex items-center gap-2">
               <User className="w-4 h-4" />
               Addressee
@@ -102,7 +102,7 @@ export default function LetterEditor({ onSent }) {
                 value={recipientUsername}
                 onChange={(e) => setRecipientUsername(e.target.value)}
                 onBlur={() => checkRecipient(recipientUsername)}
-                className="w-full px-4 md:px-6 py-3 md:py-4 bg-[#fdfbf7] border-2 border-amber-800/20 rounded-sm font-body text-base md:text-lg text-amber-900 placeholder-amber-400 focus:outline-none focus:border-amber-800/40 focus:ring-2 focus:ring-amber-100 transition-all shadow-inner"
+                className="w-full px-4 pd-xy md:px-6 py-3 md:py-4 bg-[#fdfbf7] border-2 border-amber-800/20 rounded-sm font-body text-base md:text-lg text-amber-900 placeholder-amber-400 focus:outline-none focus:border-amber-800/40 focus:ring-2 focus:ring-amber-100 transition-all shadow-inner"
                 required
               />
               {foundRecipient && (
@@ -114,19 +114,19 @@ export default function LetterEditor({ onSent }) {
             </div>
           </div>
 
-          <div className="space-y-3">
+          <div className="space-y-3 mr-b">
             <label className="font-serif text-xs md:text-sm text-amber-900 uppercase tracking-[0.2em] font-bold">Subject Matter</label>
             <input
               type="text"
               placeholder="Re: Matters of great importance..."
               value={subject}
               onChange={(e) => setSubject(e.target.value)}
-              className="w-full px-4 md:px-6 py-3 md:py-4 bg-[#fdfbf7] border-2 border-amber-800/20 rounded-sm font-serif text-xl md:text-2xl text-amber-900 placeholder-amber-400 focus:outline-none focus:border-amber-800/40 focus:ring-2 focus:ring-amber-100 transition-all shadow-inner"
+              className="w-full px-4 pd-xy md:px-6 py-3 md:py-4 bg-[#fdfbf7] border-2 border-amber-800/20 rounded-sm font-serif text-xl md:text-2xl text-amber-900 placeholder-amber-400 focus:outline-none focus:border-amber-800/40 focus:ring-2 focus:ring-amber-100 transition-all shadow-inner"
               required
             />
           </div>
 
-          <div className="grid md:grid-cols-2 gap-4 md:gap-8 p-4 md:p-8 bg-amber-100/20 rounded-sm border-2 border-amber-800/10">
+          <div className="grid md:grid-cols-2 gap-4 pd-xy md:gap-8 p-4 md:p-8 bg-amber-100/20 rounded-sm border-2 border-amber-800/10">
             <div className="space-y-4">
               <label className="font-serif text-xs md:text-sm text-amber-900 uppercase tracking-[0.2em] font-bold flex items-center gap-2">
                 <div className="w-4 h-4 rounded-full bg-linear-to-br from-red-900 to-red-950"></div>
@@ -172,7 +172,7 @@ export default function LetterEditor({ onSent }) {
             </div>
           </div>
 
-          <div className="space-y-4">
+          <div className="space-y-4 pd-y">
             <label className="font-serif text-xs md:text-sm text-amber-900 uppercase tracking-[0.2em] font-bold flex items-center gap-2">
               <Feather className="w-4 h-4" />
               The Letter
@@ -185,7 +185,7 @@ export default function LetterEditor({ onSent }) {
 
 I take pen in hand to write to you of matters that have weighed upon my mind these past days..."
                 rows={isMobile ? 10 : 14}
-                className="w-full px-4 md:px-8 py-4 md:py-8 bg-[#fdfbf7] border-2 border-amber-800/20 rounded-sm font-body text-base md:text-xl leading-relaxed resize-none focus:outline-none focus:border-amber-800/40 focus:ring-2 focus:ring-amber-100 transition-all shadow-inner text-amber-900 placeholder-amber-300"
+                className="w-full px-4 pd-x md:px-8 py-4 md:py-8 bg-[#fdfbf7] border-2 border-amber-800/20 rounded-sm font-body text-base md:text-xl leading-relaxed resize-none focus:outline-none focus:border-amber-800/40 focus:ring-2 focus:ring-amber-100 transition-all shadow-inner text-amber-900 placeholder-amber-300"
                 required
                 style={{
                   backgroundImage: isMobile ? 'none' : `repeating-linear-gradient(transparent, transparent 39px, #e5d5b5 39px, #e5d5b5 40px)`,

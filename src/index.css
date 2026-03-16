@@ -207,9 +207,41 @@ html {
 }
 
 .pd-y {
+  padding: 3vh 0 ;
+}
+
+.pd-y2 {
   padding: 6vh 0;
 }
 
 .pd-x {
+  padding: 0 3vh;
+}
+
+.pd-x2 {
   padding: 0 6vh;
+}
+
+.pd-xy {
+  padding: 2vh 3vh;
+}
+
+.pd-xy2 {
+  padding: 4vh 6vh;
+}
+
+.mr-xy {
+  margin: 2vh 3vh;
+}
+
+.mr-l {
+  margin-left: 3vh;
+}
+
+.mr-b {
+  margin-bottom: 3vh;
+}
+
+.mauto {
+  margin: auto;
 }
