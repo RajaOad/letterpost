@@ -1,12 +1,20 @@
-import React from 'react'
-import { motion } from 'framer-motion'
+import React, { Suspense, lazy } from 'react'
 import { AuthProvider } from './contexts/AuthContext'
-import Auth from './components/Auth'
-import Mailbox from './components/Mailbox'
-import LetterEditor from './components/LetterEditor'
-import LetterView from './components/LetterView'
-import Navigation from './components/Navigation'
 import { useAuth } from './contexts/AuthContext'
+
+// Lazy load components for better performance
+const Auth = lazy(() => import('./components/Auth'))
+const Mailbox = lazy(() => import('./components/Mailbox'))
+const LetterEditor = lazy(() => import('./components/LetterEditor'))
+const LetterView = lazy(() => import('./components/LetterView'))
+const Navigation = lazy(() => import('./components/Navigation'))
+
+// Simple loading fallback
+const LoadingFallback = () => (
+  <div className="min-h-screen flex items-center justify-center bg-amber-50">
+    <div className="w-12 h-12 border-4 border-amber-900 border-t-transparent rounded-full animate-spin"></div>
+  </div>
+)
 
 function AppContent() {
   const { user, loading } = useAuth()
@@ -14,50 +22,37 @@ function AppContent() {
   const [selectedLetter, setSelectedLetter] = React.useState(null)
 
   if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-amber-100 via-amber-50 to-amber-100">
-        <div className="text-center">
-          <motion.div 
-            animate={{ rotate: 360 }}
-            transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-            className="w-20 h-20 border-4 border-amber-900 border-t-transparent rounded-full mx-auto mb-6"
-          />
-          <p className="font-serif text-2xl text-amber-900 italic">Sorting the post...</p>
-        </div>
-      </div>
-    )
+    return <LoadingFallback />
   }
 
   if (!user) {
-    return <Auth />
+    return (
+      <Suspense fallback={<LoadingFallback />}>
+        <Auth />
+      </Suspense>
+    )
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-amber-50 via-amber-100/30 to-amber-50 relative">
-      {/* Rich background texture */}
-      <div className="fixed inset-0 opacity-20 pointer-events-none" style={{
-        backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.5'/%3E%3C/svg%3E")`
-      }}></div>
-
-      <div className="relative z-10">
+    <div className="min-h-screen bg-amber-50">
+      <Suspense fallback={<LoadingFallback />}>
         <Navigation 
           currentView={currentView} 
           setCurrentView={setCurrentView}
           setSelectedLetter={setSelectedLetter}
         />
-        <main className="container mx-auto px-4 py-12 max-w-6xl">
+      </Suspense>
+      
+      <main className="container mx-auto px-4 py-6 max-w-6xl">
+        <Suspense fallback={<LoadingFallback />}>
           {currentView === 'mailbox' && (
-            <Mailbox 
-              onOpenLetter={(letter) => {
-                setSelectedLetter(letter)
-                setCurrentView('letter')
-              }}
-            />
+            <Mailbox onOpenLetter={(letter) => {
+              setSelectedLetter(letter)
+              setCurrentView('letter')
+            }} />
           )}
           {currentView === 'compose' && (
-            <LetterEditor 
-              onSent={() => setCurrentView('mailbox')}
-            />
+            <LetterEditor onSent={() => setCurrentView('mailbox')} />
           )}
           {currentView === 'letter' && selectedLetter && (
             <LetterView 
@@ -68,8 +63,8 @@ function AppContent() {
               }}
             />
           )}
-        </main>
-      </div>
+        </Suspense>
+      </main>
     </div>
   )
 }
