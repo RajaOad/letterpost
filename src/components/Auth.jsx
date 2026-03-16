@@ -3,7 +3,6 @@ import { motion } from 'framer-motion'
 import { Mail, Lock, User, Feather, BookOpen } from 'lucide-react'
 import { useAuth } from '../contexts/AuthContext'
 
-// Mobile detection
 const isMobile = typeof window !== 'undefined' && window.innerWidth < 768
 
 export default function Auth() {
@@ -54,12 +53,12 @@ export default function Auth() {
       <motion.div 
         initial={isMobile ? false : { opacity: 0, y: 30 }}
         animate={isMobile ? false : { opacity: 1, y: 0 }}
-        className="w-full max-w-md relative z-10"
+        className="w-full max-w-md relative z-10 px-2"
       >
         {/* Wax Seal Header - simplified on mobile */}
         <div className="text-center mb-6 md:mb-8">
           <motion.div 
-            className="w-20 h-20 md:w-28 md:h-28 mx-auto mb-4 md:mb-6 rounded-full bg-linear-to-br from-red-800 via-red-700 to-red-900 flex items-center justify-center shadow-2xl border-4 border-amber-200"
+            className="w-20 h-20 md:w-28 md:h-28 mx-auto mb-4 md:mb-6 rounded-full bg-gradient-to-br from-red-800 via-red-700 to-red-900 flex items-center justify-center shadow-2xl border-4 border-amber-200"
             animate={isMobile ? {} : { rotate: [0, 5, -5, 0] }}
             transition={isMobile ? {} : { duration: 6, repeat: Infinity, ease: "easeInOut" }}
           >
@@ -166,14 +165,14 @@ export default function Auth() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-3 md:py-4 bg-linear-to-r from-red-900 via-red-800 to-red-900 text-amber-100 font-serif text-lg md:text-xl rounded-sm hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed border-2 border-red-950 font-bold tracking-wide"
+              className="w-full py-3 md:py-4 bg-gradient-to-r from-red-900 via-red-800 to-red-900 text-amber-100 font-serif text-lg md:text-xl rounded-sm hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed border-2 border-red-950 font-bold tracking-wide"
             >
               {loading ? 'Sealing envelope...' : isLogin ? 'Open Mailbox' : 'Create Account'}
             </button>
           </form>
         </div>
 
-        <p className="text-center mt-4 md:mt-6 font-body text-xs md:text-sm text-amber-700/70 italic">
+        <p className="text-center mt-4 md:mt-6 font-body text-xs md:text-sm text-amber-700/70 italic px-4">
           By joining, you pledge to write with intention and patience
         </p>
       </motion.div>

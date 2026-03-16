@@ -14,7 +14,7 @@ export default function Navigation({ currentView, setCurrentView, setSelectedLet
   }
 
   return (
-    <nav className="bg-linear-to-r from-amber-100 via-amber-50 to-amber-100 border-b-2 border-amber-800/20 shadow-xl relative">
+    <nav className="bg-gradient-to-r from-amber-100 via-amber-50 to-amber-100 border-b-2 border-amber-800/20 shadow-xl relative">
       {/* Texture - desktop only */}
       {!isMobile && (
         <div className="absolute inset-0 opacity-20 pointer-events-none" style={{
@@ -22,12 +22,10 @@ export default function Navigation({ currentView, setCurrentView, setSelectedLet
         }}></div>
       )}
 
-      <div className="container mx-auto px-3 md:px-4 py-3 md:py-5 max-w-6xl relative">
+      <div className="w-full px-4 sm:px-6 lg:px-8 py-3 md:py-5 max-w-7xl mx-auto relative">
         <div className="flex items-center justify-between">
-          <div 
-            className="flex items-center gap-3 md:gap-5"
-          >
-            <div className="w-10 h-10 md:w-14 md:h-14 rounded-full bg-linear-to-br from-red-900 via-red-800 to-red-950 shadow-2xl flex items-center justify-center border-2 md:border-4 border-amber-200 shrink-0">
+          <div className="flex items-center gap-3 md:gap-5">
+            <div className="w-10 h-10 md:w-14 md:h-14 rounded-full bg-gradient-to-br from-red-900 via-red-800 to-red-950 shadow-2xl flex items-center justify-center border-2 md:border-4 border-amber-200 shrink-0">
               <span className="font-serif text-xl md:text-3xl text-amber-100 font-bold">S</span>
             </div>
             <div className="min-w-0">
@@ -69,7 +67,7 @@ function NavButton({ active, onClick, icon, label }) {
       onClick={onClick}
       className={`flex items-center gap-1.5 md:gap-3 px-3 md:px-6 py-2 md:py-3 rounded-sm font-serif transition-all border-2 text-sm md:text-base ${
         active 
-          ? 'bg-linear-to-r from-red-900 to-red-800 text-amber-50 border-red-950 shadow-lg' 
+          ? 'bg-gradient-to-r from-red-900 to-red-800 text-amber-50 border-red-950 shadow-lg' 
           : 'text-amber-900 border-amber-800/20 hover:bg-amber-200 hover:border-amber-800/40'
       }`}
     >

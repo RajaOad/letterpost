@@ -8,7 +8,6 @@ import LetterView from './components/LetterView'
 import Navigation from './components/Navigation'
 import { useAuth } from './contexts/AuthContext'
 
-// Check if mobile for reduced motion
 const isMobile = typeof window !== 'undefined' && window.innerWidth < 768
 
 function AppContent() {
@@ -19,12 +18,7 @@ function AppContent() {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-amber-50">
-        {!isMobile && (
-          <div className="absolute inset-0 opacity-10 pointer-events-none" style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.5'/%3E%3C/svg%3E")`
-          }}></div>
-        )}
-        <div className="text-center relative z-10">
+        <div className="text-center relative z-10 px-4">
           {!isMobile ? (
             <motion.div 
               animate={{ rotate: 360 }}
@@ -45,21 +39,14 @@ function AppContent() {
   }
 
   return (
-    <div className="min-h-screen bg-amber-50 relative">
-      {/* Simplified background for mobile */}
-      {!isMobile && (
-        <div className="fixed inset-0 opacity-10 pointer-events-none" style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.5'/%3E%3C/svg%3E")`
-        }}></div>
-      )}
-
+    <div className="min-h-screen bg-amber-50 relative overflow-x-hidden">
       <div className="relative z-10">
         <Navigation 
           currentView={currentView} 
           setCurrentView={setCurrentView}
           setSelectedLetter={setSelectedLetter}
         />
-        <main className="container mx-auto px-4 py-8 md:py-12 max-w-6xl">
+        <main className="w-full px-4 sm:px-6 lg:px-8 py-8 md:py-12 max-w-7xl mx-auto">
           {currentView === 'mailbox' && (
             <Mailbox 
               onOpenLetter={(letter) => {

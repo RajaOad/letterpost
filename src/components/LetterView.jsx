@@ -5,7 +5,6 @@ import { useAuth } from '../contexts/AuthContext'
 import { markLetterRead, supabase } from '../lib/supabase'
 import { format } from 'date-fns'
 
-// Check if mobile for reduced motion
 const isMobile = typeof window !== 'undefined' && window.innerWidth < 768
 
 export default function LetterView({ letter, onBack }) {
@@ -71,10 +70,9 @@ export default function LetterView({ letter, onBack }) {
   const deliveryTime = new Date(letter.delivery_at)
   const isInTransit = deliveryTime > now
 
-  // Show transit view for BOTH sender and recipient when letter is in transit
   if (isInTransit) {
     return (
-      <div className="max-w-2xl mx-auto px-4">
+      <div className="max-w-2xl mx-auto px-4 pb-8">
         <button
           onClick={onBack}
           className="mb-8 flex items-center gap-3 text-amber-900 hover:text-red-900 transition-colors font-serif group"
@@ -157,7 +155,7 @@ export default function LetterView({ letter, onBack }) {
   }
 
   return (
-    <div className="max-w-4xl mx-auto pb-12">
+    <div className="max-w-4xl mx-auto pb-12 px-4">
       {/* Error Message */}
       {deleteError && (
         <motion.div 

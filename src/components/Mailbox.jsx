@@ -78,7 +78,7 @@ export default function Mailbox({ onOpenLetter }) {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center h-64 md:h-96">
+      <div className="flex items-center justify-center h-64 md:h-96 px-4">
         <div className="text-center">
           {isMobile ? (
             <div className="w-12 h-12 md:w-16 md:h-16 border-4 border-amber-900 border-t-transparent rounded-full mx-auto mb-4 animate-spin" />
@@ -96,10 +96,10 @@ export default function Mailbox({ onOpenLetter }) {
   }
 
   return (
-    <div className="space-y-6 md:space-y-8 px-1 md:px-0">
+    <div className="space-y-6 md:space-y-8 w-full">
       {/* Error Display */}
       {deleteError && (
-        <div className="p-3 md:p-4 bg-red-100 border-2 border-red-800/20 rounded-sm text-red-900 font-body flex items-center gap-2 md:gap-3">
+        <div className="p-3 md:p-4 bg-red-100 border-2 border-red-800/20 rounded-sm text-red-900 font-body flex items-center gap-2 md:gap-3 mx-0">
           <AlertCircle className="w-5 h-5" />
           <span className="text-sm md:text-base">{deleteError}</span>
           <button onClick={() => setDeleteError(null)} className="ml-auto text-xs md:text-sm underline">Dismiss</button>
@@ -107,23 +107,23 @@ export default function Mailbox({ onOpenLetter }) {
       )}
 
       {/* Elegant Header */}
-      <div className="text-center pb-4 md:pb-6 border-b-2 border-amber-800/20">
+      <div className="text-center pb-4 md:pb-6 border-b-2 border-amber-800/20 px-2">
         <h1 className="font-serif text-3xl md:text-4xl lg:text-5xl text-amber-950 mb-2 font-bold tracking-wide">
           The Post Office
         </h1>
         <p className="font-body text-amber-700 italic text-sm md:text-base">Your personal correspondence chamber</p>
       </div>
 
-      {/* Filter Tabs - Scrollable on mobile */}
-      <div className="flex flex-nowrap justify-start md:justify-center gap-2 overflow-x-auto pb-2 md:pb-0 -mx-2 px-2 md:mx-0 md:px-0">
+      {/* Filter Tabs - Scrollable on mobile with padding */}
+      <div className="flex flex-nowrap justify-start md:justify-center gap-2 overflow-x-auto pb-2 px-2 md:px-0 -mx-2 md:mx-0 scrollbar-hide">
         <FilterButton active={filter === 'all'} onClick={() => setFilter('all')} label="All" count={counts.all} icon={Inbox} />
         <FilterButton active={filter === 'received'} onClick={() => setFilter('received')} label="Received" count={counts.received} icon={Mail} />
         <FilterButton active={filter === 'sent'} onClick={() => setFilter('sent')} label="Sent" count={counts.sent} icon={Send} />
         <FilterButton active={filter === 'transit'} onClick={() => setFilter('transit')} label="Transit" count={counts.transit} icon={Clock} />
       </div>
 
-      {/* Letters Grid */}
-      <div className="grid gap-4 md:gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+      {/* Letters Grid with proper spacing */}
+      <div className="grid gap-4 md:gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 px-0 md:px-0 pb-8">
         <AnimatePresence mode="popLayout">
           {filteredLetters.map((letter) => {
             const status = getLetterStatus(letter)
@@ -148,7 +148,7 @@ export default function Mailbox({ onOpenLetter }) {
       </div>
 
       {filteredLetters.length === 0 && (
-        <div className="text-center py-12 md:py-20 bg-amber-50/50 rounded-lg border-2 border-dashed border-amber-300/50">
+        <div className="text-center py-12 md:py-20 bg-amber-50/50 rounded-lg border-2 border-dashed border-amber-300/50 mx-2 md:mx-0">
           <Feather className="w-16 h-16 md:w-20 md:h-20 mx-auto text-amber-300 mb-4 md:mb-6" />
           <p className="font-serif text-2xl md:text-3xl text-amber-800 mb-2 md:mb-3">The desk is clear</p>
           <p className="font-body text-amber-600 italic text-base md:text-lg">No letters await your attention</p>
