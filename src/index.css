@@ -249,7 +249,7 @@ html {
 }
 
 .pd-xy2 {
-  padding: 1.5rem 6vw;
+  padding: 1.5rem 4vw;
 }
 @media (min-width: 768px) {
   .pd-xy2 { padding: 4vh 6vh; }
