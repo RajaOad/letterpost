@@ -83,7 +83,7 @@ export default function LetterView({ letter, onBack }) {
           <span className="text-lg">Return to Post Office</span>
         </button>
 
-        <div className="bg-gradient-to-b from-amber-100 via-amber-50 to-amber-100 rounded-sm shadow-2xl border-4 border-amber-800/20 p-8 md:p-12 text-center relative overflow-hidden">
+        <div className="bg-linear-to-b from-amber-100 via-amber-50 to-amber-100 rounded-sm shadow-2xl border-4 border-amber-800/20 p-8 md:p-12 text-center relative overflow-hidden">
           {/* NO SVG noise on mobile */}
           {!isMobile && (
             <div className="absolute inset-0 opacity-30" style={{
@@ -93,8 +93,8 @@ export default function LetterView({ letter, onBack }) {
 
           <div className="relative z-10 mb-8 md:mb-10">
             <div className="w-32 h-32 md:w-40 md:h-40 mx-auto relative">
-              <div className="absolute inset-0 bg-gradient-to-br from-amber-300 to-amber-400 rounded-lg shadow-xl transform rotate-6"></div>
-              <div className="absolute inset-0 bg-gradient-to-br from-amber-200 to-amber-300 rounded-lg shadow-lg flex items-center justify-center">
+              <div className="absolute inset-0 bg-linear-to-br from-amber-300 to-amber-400 rounded-lg shadow-xl transform rotate-6"></div>
+              <div className="absolute inset-0 bg-linear-to-br from-amber-200 to-amber-300 rounded-lg shadow-lg flex items-center justify-center">
                 {isSender ? (
                   <Send className="w-12 h-12 md:w-16 md:h-16 text-amber-800" />
                 ) : (
@@ -122,7 +122,7 @@ export default function LetterView({ letter, onBack }) {
               )}
             </p>
             
-            <div className="my-6 md:my-10 p-4 md:p-8 bg-gradient-to-b from-amber-200/50 to-amber-100/50 rounded-sm border-2 border-amber-800/20 inline-block shadow-inner">
+            <div className="my-6 md:my-10 p-4 md:p-8 bg-linear-to-b from-amber-200/50 to-amber-100/50 rounded-sm border-2 border-amber-800/20 inline-block shadow-inner">
               <div className="flex items-center justify-center gap-2 md:gap-3 text-amber-900 mb-2 md:mb-3">
                 <MapPin className="w-5 h-5 md:w-6 md:h-6" />
                 <span className="font-serif text-lg md:text-xl tracking-wider">
@@ -221,7 +221,7 @@ export default function LetterView({ letter, onBack }) {
             className="relative cursor-pointer max-w-2xl mx-auto"
             onClick={handleOpen}
           >
-            <div className="bg-gradient-to-br from-amber-200 via-amber-100 to-amber-200 rounded-sm shadow-2xl border-4 border-amber-800/20 aspect-[1.5/1] flex flex-col items-center justify-center relative overflow-hidden group">
+            <div className="bg-linear-to-br from-amber-200 via-amber-100 to-amber-200 rounded-sm shadow-2xl border-4 border-amber-800/20 aspect-[1.5/1] flex flex-col items-center justify-center relative overflow-hidden group">
               {/* NO SVG noise on mobile */}
               {!isMobile && (
                 <div className="absolute inset-0 opacity-40" style={{
@@ -229,18 +229,18 @@ export default function LetterView({ letter, onBack }) {
                 }}></div>
               )}
 
-              <div className="absolute top-0 left-0 right-0 h-[60%] bg-gradient-to-b from-amber-300 to-amber-200 transform origin-top shadow-inner"
+              <div className="absolute top-0 left-0 right-0 h-[60%] bg-linear-to-b from-amber-300 to-amber-200 transform origin-top shadow-inner"
                    style={{ clipPath: 'polygon(0 0, 50% 100%, 100% 0)' }}></div>
 
-              <div className="absolute bottom-0 left-0 w-1/2 h-[60%] bg-gradient-to-tr from-amber-300 to-amber-200 origin-bottom-left shadow-inner"
+              <div className="absolute bottom-0 left-0 w-1/2 h-[60%] bg-linear-to-tr from-amber-300 to-amber-200 origin-bottom-left shadow-inner"
                    style={{ clipPath: 'polygon(0 0, 0 100%, 100% 100%)' }}></div>
-              <div className="absolute bottom-0 right-0 w-1/2 h-[60%] bg-gradient-to-tl from-amber-300 to-amber-200 origin-bottom-right shadow-inner"
+              <div className="absolute bottom-0 right-0 w-1/2 h-[60%] bg-linear-to-tl from-amber-300 to-amber-200 origin-bottom-right shadow-inner"
                    style={{ clipPath: 'polygon(100% 0, 0 100%, 100% 100%)' }}></div>
 
               <div className="absolute top-[60%] left-0 right-0 h-px bg-amber-800/20"></div>
 
               <div 
-                className={`relative z-10 w-28 h-28 md:w-32 md:h-32 rounded-full bg-gradient-to-br ${waxColors[letter.wax_color || 'red']} shadow-2xl flex items-center justify-center border-4 border-white/30 transition-all duration-500 ${sealBroken ? 'scale-0 opacity-0' : 'scale-100 opacity-100'}`}
+                className={`relative z-10 w-28 h-28 md:w-32 md:h-32 rounded-full bg-linear-to-br ${waxColors[letter.wax_color || 'red']} shadow-2xl flex items-center justify-center border-4 border-white/30 transition-all duration-500 ${sealBroken ? 'scale-0 opacity-0' : 'scale-100 opacity-100'}`}
               >
                 <span className="font-serif text-4xl md:text-5xl text-amber-100 font-bold drop-shadow-lg">
                   {letter.sender?.display_name?.[0] || 'S'}
@@ -341,7 +341,7 @@ export default function LetterView({ letter, onBack }) {
                   <p className="font-script text-3xl md:text-5xl text-amber-900 mb-4 md:mb-6 transform -rotate-2">With warm regards,</p>
                   
                   <div className="flex items-center gap-4 md:gap-6 mt-6 md:mt-8">
-                    <div className={`w-14 h-14 md:w-20 md:h-20 rounded-full bg-gradient-to-br ${waxColors[letter.wax_color || 'red']} flex items-center justify-center shadow-xl transform rotate-12 border-4 border-white/50`}>
+                    <div className={`w-14 h-14 md:w-20 md:h-20 rounded-full bg-linear-to-br ${waxColors[letter.wax_color || 'red']} flex items-center justify-center shadow-xl transform rotate-12 border-4 border-white/50`}>
                       <span className="font-serif text-xl md:text-3xl text-amber-100 font-bold">
                         {letter.sender?.display_name?.[0]}
                       </span>

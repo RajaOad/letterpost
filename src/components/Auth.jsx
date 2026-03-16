@@ -33,8 +33,8 @@ export default function Auth() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-amber-100 p-4 relative overflow-hidden">
-      {/* NO background effects on mobile */}
+    <div className="min-h-screen flex items-center justify-center bg-amber-100 relative overflow-hidden">
+      {/* Background effects - desktop only */}
       {!isMobile && (
         <>
           <div className="absolute inset-0 opacity-20" style={{
@@ -45,10 +45,10 @@ export default function Auth() {
         </>
       )}
 
-      <div className="w-full max-w-md relative z-10 px-2">
-        {/* Header - NO animation on mobile */}
+      <div className="w-full max-w-md relative z-10 p-4">
+        {/* Header */}
         <div className="text-center mb-6 md:mb-8">
-          <div className="w-20 h-20 md:w-28 md:h-28 mx-auto mb-4 md:mb-6 rounded-full bg-gradient-to-br from-red-800 via-red-700 to-red-900 flex items-center justify-center shadow-xl border-4 border-amber-200">
+          <div className="w-20 h-20 md:w-28 md:h-28 mx-auto mb-4 md:mb-6 rounded-full bg-linear-to-br from-red-800 via-red-700 to-red-900 flex items-center justify-center shadow-xl border-4 border-amber-200">
             <BookOpen className="w-10 h-10 md:w-14 md:h-14 text-amber-100" />
           </div>
           <h1 className="font-serif text-4xl md:text-5xl text-amber-950 mb-2 md:mb-3 font-bold tracking-wide">Slow Letters</h1>
@@ -57,7 +57,7 @@ export default function Auth() {
 
         {/* Auth Card */}
         <div className="bg-amber-50 rounded-sm shadow-xl border-2 border-amber-300 overflow-hidden relative">
-          {/* NO texture on mobile */}
+          {/* Texture - desktop only */}
           {!isMobile && (
             <div className="absolute inset-0 opacity-20 pointer-events-none" style={{
               backgroundImage: `url("data:image/svg+xml,%3Csvg width='200' height='200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.15'/%3E%3C/svg%3E")`
@@ -152,7 +152,7 @@ export default function Auth() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-3 md:py-4 bg-gradient-to-r from-red-900 via-red-800 to-red-900 text-amber-100 font-serif text-lg md:text-xl rounded-sm hover:shadow-lg transition-shadow disabled:opacity-50 disabled:cursor-not-allowed border-2 border-red-950 font-bold tracking-wide"
+              className="w-full py-3 md:py-4 bg-linear-to-r from-red-900 via-red-800 to-red-900 text-amber-100 font-serif text-lg md:text-xl rounded-sm hover:shadow-lg transition-shadow disabled:opacity-50 disabled:cursor-not-allowed border-2 border-red-950 font-bold tracking-wide"
             >
               {loading ? 'Sealing envelope...' : isLogin ? 'Open Mailbox' : 'Create Account'}
             </button>

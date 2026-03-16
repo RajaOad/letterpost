@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { motion } from 'framer-motion'
 import { Send, Stamp, User, Clock, Feather, AlertCircle, Scroll } from 'lucide-react'
 import { useAuth } from '../contexts/AuthContext'
 import { sendLetter, findUserByUsername } from '../lib/supabase'
@@ -76,11 +75,11 @@ export default function LetterEditor({ onSent }) {
   }
 
   return (
-    <div className="max-w-4xl mx-auto px-2 sm:px-0 pb-8">
+    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-8">
       <div className="bg-amber-50 rounded-sm shadow-2xl border-2 border-amber-800/20 overflow-hidden relative">
-        <div className="bg-gradient-to-r from-amber-200 via-amber-100 to-amber-200 px-4 md:px-8 py-6 md:py-8 border-b-2 border-amber-800/20 relative">
+        <div className="bg-linear-to-r from-amber-200 via-amber-100 to-amber-200 px-4 md:px-8 py-6 md:py-8 border-b-2 border-amber-800/20 relative">
           <div className="flex items-center gap-3 md:gap-5">
-            <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-gradient-to-br from-red-900 via-red-800 to-red-950 shadow-lg flex items-center justify-center border-4 border-amber-200 shrink-0">
+            <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-linear-to-br from-red-900 via-red-800 to-red-950 shadow-lg flex items-center justify-center border-4 border-amber-200 shrink-0">
               <Scroll className="w-6 h-6 md:w-8 md:h-8 text-amber-100" />
             </div>
             <div>
@@ -130,16 +129,16 @@ export default function LetterEditor({ onSent }) {
           <div className="grid md:grid-cols-2 gap-4 md:gap-8 p-4 md:p-8 bg-amber-100/20 rounded-sm border-2 border-amber-800/10">
             <div className="space-y-4">
               <label className="font-serif text-xs md:text-sm text-amber-900 uppercase tracking-[0.2em] font-bold flex items-center gap-2">
-                <div className="w-4 h-4 rounded-full bg-gradient-to-br from-red-900 to-red-950"></div>
+                <div className="w-4 h-4 rounded-full bg-linear-to-br from-red-900 to-red-950"></div>
                 Wax Seal Color
               </label>
-              <div className="flex gap-3 md:gap-4">
+              <div className="flex gap-3 md:gap-4 flex-wrap">
                 {WAX_COLORS.map((color) => (
                   <button
                     key={color.id}
                     type="button"
                     onClick={() => setWaxColor(color.id)}
-                    className={`w-10 h-10 md:w-14 md:h-14 rounded-full bg-gradient-to-br ${color.class} shadow-lg transition-all border-4 ${
+                    className={`w-10 h-10 md:w-14 md:h-14 rounded-full bg-linear-to-br ${color.class} shadow-lg transition-all border-4 ${
                       waxColor === color.id ? 'border-amber-400 scale-110 ring-2 ring-amber-200' : 'border-white/50'
                     }`}
                     title={color.name}
@@ -210,7 +209,7 @@ I take pen in hand to write to you of matters that have weighed upon my mind the
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-4 md:py-5 bg-gradient-to-r from-red-900 via-red-800 to-red-900 text-amber-50 font-serif text-xl md:text-2xl rounded-sm shadow-lg hover:shadow-xl transition-shadow disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3 md:gap-4 border-2 border-red-950 tracking-wide"
+            className="w-full py-4 md:py-5 bg-linear-to-r from-red-900 via-red-800 to-red-900 text-amber-50 font-serif text-xl md:text-2xl rounded-sm shadow-lg hover:shadow-xl transition-shadow disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3 md:gap-4 border-2 border-red-950 tracking-wide"
           >
             {loading ? (
               <>

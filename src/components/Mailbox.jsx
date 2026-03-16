@@ -88,10 +88,10 @@ export default function Mailbox({ onOpenLetter }) {
   }
 
   return (
-    <div className="space-y-6 md:space-y-8 w-full px-2 sm:px-0">
+    <div className="space-y-6 md:space-y-8 w-full px-4 sm:px-6 lg:px-8">
       {/* Error Display */}
       {deleteError && (
-        <div className="p-3 md:p-4 bg-red-100 border-2 border-red-800/20 rounded-sm text-red-900 font-body flex items-center gap-2 md:gap-3 mx-2 sm:mx-0">
+        <div className="p-3 md:p-4 bg-red-100 border-2 border-red-800/20 rounded-sm text-red-900 font-body flex items-center gap-2 md:gap-3">
           <AlertCircle className="w-5 h-5" />
           <span className="text-sm md:text-base">{deleteError}</span>
           <button onClick={() => setDeleteError(null)} className="ml-auto text-xs md:text-sm underline">Dismiss</button>
@@ -99,7 +99,7 @@ export default function Mailbox({ onOpenLetter }) {
       )}
 
       {/* Elegant Header */}
-      <div className="text-center pb-4 md:pb-6 border-b-2 border-amber-800/20 px-2">
+      <div className="text-center pb-4 md:pb-6 border-b-2 border-amber-800/20">
         <h1 className="font-serif text-3xl md:text-4xl lg:text-5xl text-amber-950 mb-2 font-bold tracking-wide">
           The Post Office
         </h1>
@@ -107,7 +107,7 @@ export default function Mailbox({ onOpenLetter }) {
       </div>
 
       {/* Filter Tabs - Scrollable on mobile */}
-      <div className="flex flex-nowrap justify-start md:justify-center gap-2 overflow-x-auto pb-2 px-2 md:px-0 scrollbar-hide">
+      <div className="flex flex-nowrap justify-start md:justify-center gap-2 overflow-x-auto pb-2 scrollbar-hide">
         <FilterButton active={filter === 'all'} onClick={() => setFilter('all')} label="All" count={counts.all} icon={Inbox} />
         <FilterButton active={filter === 'received'} onClick={() => setFilter('received')} label="Received" count={counts.received} icon={Mail} />
         <FilterButton active={filter === 'sent'} onClick={() => setFilter('sent')} label="Sent" count={counts.sent} icon={Send} />
@@ -115,7 +115,7 @@ export default function Mailbox({ onOpenLetter }) {
       </div>
 
       {/* Letters Grid */}
-      <div className="grid gap-4 md:gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 px-2 sm:px-0 pb-8">
+      <div className="grid gap-4 md:gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 pb-8">
         {filteredLetters.map((letter) => {
           const status = getLetterStatus(letter)
           const isReceived = letter.recipient_id === user.id
@@ -149,7 +149,7 @@ function FilterButton({ active, onClick, label, count, icon: Icon }) {
       onClick={onClick}
       className={`flex items-center gap-1.5 md:gap-2 px-3 md:px-6 py-2 md:py-3 rounded-sm font-serif transition-all duration-300 border-2 text-sm md:text-base whitespace-nowrap shrink-0 ${
         active 
-          ? 'bg-gradient-to-r from-amber-900 to-amber-800 text-amber-50 border-amber-950 shadow-lg' 
+          ? 'bg-linear-to-r from-amber-900 to-amber-800 text-amber-50 border-amber-950 shadow-lg' 
           : 'bg-amber-100/80 text-amber-900 border-amber-800/20 hover:bg-amber-200 hover:border-amber-800/40'
       }`}
     >
@@ -181,17 +181,17 @@ function EnvelopeCard({ letter, status, isReceived }) {
 
   return (
     <div className={`
-      relative h-full bg-gradient-to-br from-amber-50 via-amber-100/80 to-amber-50 
+      relative h-full bg-linear-to-br from-amber-50 via-amber-100/80 to-amber-50 
       rounded-sm shadow-md hover:shadow-xl transition-shadow duration-200
       border-2 ${config.border} overflow-hidden
     `}>
-      {/* NO paper texture on mobile - too heavy */}
-      <div className="absolute top-0 left-0 right-0 h-10 md:h-12 bg-gradient-to-b from-black/5 to-transparent pointer-events-none"></div>
-      <div className="absolute bottom-0 left-0 right-0 h-10 md:h-12 bg-gradient-to-t from-black/5 to-transparent pointer-events-none"></div>
+      {/* Gradient overlays */}
+      <div className="absolute top-0 left-0 right-0 h-10 md:h-12 bg-linear-to-b from-black/5 to-transparent pointer-events-none"></div>
+      <div className="absolute bottom-0 left-0 right-0 h-10 md:h-12 bg-linear-to-t from-black/5 to-transparent pointer-events-none"></div>
 
       <div className="relative p-4 md:p-6 flex flex-col h-full">
         <div className="flex justify-between items-start mb-4 md:mb-5">
-          <div className={`w-10 h-10 md:w-14 md:h-14 rounded-full bg-gradient-to-br ${waxColors[letter.wax_color || 'red']} shadow-lg flex items-center justify-center transform rotate-12 ${config.sealOpacity} ring-2 md:ring-4 ring-amber-200/50`}>
+          <div className={`w-10 h-10 md:w-14 md:h-14 rounded-full bg-linear-to-br ${waxColors[letter.wax_color || 'red']} shadow-lg flex items-center justify-center transform rotate-12 ${config.sealOpacity} ring-2 md:ring-4 ring-amber-200/50`}>
             <span className="font-serif text-base md:text-xl text-amber-100 font-bold">
               {isReceived ? letter.sender?.display_name?.[0] : letter.recipient?.display_name?.[0]}
             </span>
@@ -214,7 +214,7 @@ function EnvelopeCard({ letter, status, isReceived }) {
           </p>
         </div>
 
-        <div className="flex-grow">
+        <div className="grow">
           <div className="w-8 md:w-12 h-0.5 bg-amber-800/20 mb-2 md:mb-3"></div>
           <h4 className="font-serif text-base md:text-lg text-amber-950 leading-snug line-clamp-2 font-semibold">
             {letter.subject}

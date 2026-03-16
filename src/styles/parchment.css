@@ -23,7 +23,7 @@
 
 html {
   scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch; /* Smooth momentum scrolling on iOS */
+  -webkit-overflow-scrolling: touch;
 }
 
 body {
@@ -32,10 +32,9 @@ body {
   background-image: 
     url("data:image/svg+xml,%3Csvg width='200' height='200' viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E"),
     linear-gradient(135deg, #e6d5b5 0%, #f4e8d0 50%, #e8d4b8 100%);
-  background-attachment: scroll; /* CHANGED: was 'fixed', causes lag */
+  background-attachment: scroll;
   color: var(--ink);
   min-height: 100vh;
-  /* Enable hardware acceleration for smoother scrolling */
   -webkit-transform: translateZ(0);
   transform: translateZ(0);
 }
@@ -80,7 +79,277 @@ body {
   font-family: 'Crimson Text', Georgia, serif;
 }
 
-/* Vintage paper card effect */
+/* Wax seal colors for Tailwind v4 compatibility */
+.bg-wax-red {
+  background: radial-gradient(circle at 30% 30%, #a03040 0%, var(--wax-red) 50%, #6b1a25 100%);
+}
+
+.bg-wax-green {
+  background: radial-gradient(circle at 30% 30%, #4a7c2a 0%, var(--wax-green) 50%, #1a3509 100%);
+}
+
+.bg-wax-blue {
+  background: radial-gradient(circle at 30% 30%, #3d5a8a 0%, var(--wax-blue) 50%, #0f1f35 100%);
+}
+
+.bg-wax-gold {
+  background: radial-gradient(circle at 30% 30%, #d4a030 0%, var(--wax-gold) 50%, #7a5c08 100%);
+}
+
+/* Paper texture background */
+.bg-paper-texture {
+  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+}
+
+/* Parchment colors for Tailwind v4 */
+.bg-parchment-50 {
+  background-color: #faf6ed;
+}
+
+.bg-parchment-100 {
+  background-color: #f4e8d0;
+}
+
+.bg-parchment-200 {
+  background-color: #e6d5b5;
+}
+
+.bg-parchment-300 {
+  background-color: #d4c4a8;
+}
+
+.text-parchment-100 {
+  color: #faf6ed;
+}
+
+/* Aspect ratio fallback for older browsers */
+.aspect-3\/2 {
+  aspect-ratio: 3 / 2;
+}
+
+@supports not (aspect-ratio: 3 / 2) {
+  .aspect-3\/2::before {
+    content: '';
+    float: left;
+    padding-top: 66.67%;
+  }
+  .aspect-3\/2::after {
+    content: '';
+    display: block;
+    clear: both;
+  }
+}
+
+/* Mobile-specific optimizations */
+@media (max-width: 768px) {
+  /* Reduce motion for better performance */
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  /* Re-enable essential transitions */
+  button,
+  .transition-all,
+  .transition-colors,
+  .transition-shadow,
+  .transition-opacity,
+  .transition-transform {
+    transition-duration: 0.15s !important;
+  }
+  
+  /* Disable heavy blur effects */
+  .blur-2xl,
+  .blur-3xl,
+  .blur-xl {
+    filter: none !important;
+  }
+  
+  /* Simplify gradients on mobile - keep colors but reduce complexity */
+  .bg-linear-to-r,
+  .bg-linear-to-br,
+  .bg-linear-to-b,
+  .bg-linear-to-tr,
+  .bg-linear-to-tl,
+  .bg-linear-to-t {
+    background-image: none !important;
+  }
+  
+  /* Restore solid colors for mobile */
+  .from-red-900 {
+    background-color: #7f1d1d !important;
+  }
+  .from-amber-100 {
+    background-color: #fef3c7 !important;
+  }
+  .from-amber-200 {
+    background-color: #fde68a !important;
+  }
+  .from-amber-50 {
+    background-color: #fffbeb !important;
+  }
+  .from-green-900 {
+    background-color: #14532d !important;
+  }
+  .from-blue-950 {
+    background-color: #172554 !important;
+  }
+  .from-yellow-700 {
+    background-color: #a16207 !important;
+  }
+  
+  /* Ensure wax seals are visible */
+  .bg-wax-red,
+  .bg-wax-green,
+  .bg-wax-blue,
+  .bg-wax-gold {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+  
+  /* Fix for mobile viewport */
+  html {
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+  }
+  
+  body {
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100vw;
+  }
+  
+  /* Reduce shadow intensity */
+  .shadow-xl,
+  .shadow-2xl,
+  .shadow-lg {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+  }
+  
+  /* Ensure icons are visible */
+  svg {
+    display: inline-block !important;
+    visibility: visible !important;
+  }
+  
+  /* Fix for iOS tap highlights */
+  button,
+  a {
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  /* Prevent horizontal scroll */
+  .max-w-7xl,
+  .max-w-4xl,
+  .max-w-2xl,
+  .max-w-md {
+    max-width: 100% !important;
+  }
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  :root {
+    --ink: #000000;
+    --ink-light: #333333;
+  }
+  
+  .border-amber-800\/20,
+  .border-amber-800\/10 {
+    border-color: #92400e !important;
+    border-opacity: 1 !important;
+  }
+}
+
+/* Print styles */
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+  }
+  
+  .no-print {
+    display: none !important;
+  }
+  
+  .shadow-xl,
+  .shadow-2xl,
+  .shadow-lg,
+  .shadow-md {
+    box-shadow: none !important;
+  }
+}
+
+/* Utility classes for consistent spacing */
+.safe-area-inset {
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
+
+/* Fix for notch devices */
+@supports (padding-top: env(safe-area-inset-top)) {
+  .safe-top {
+    padding-top: env(safe-area-inset-top);
+  }
+  
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+/* Hardware acceleration helpers */
+.gpu-accelerated {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+  will-change: transform;
+}
+
+/* Content visibility for off-screen elements */
+.content-visibility-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 500px;
+}
+
+/* Font display swap for better loading */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Dancing Script';
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Crimson Text';
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'IM Fell English';
+  font-display: swap;
+}
+
+/* Vintage card effect */
 .vintage-card {
   background: linear-gradient(135deg, var(--parchment-light) 0%, var(--parchment) 100%);
   border: 1px solid #d4c4a8;
@@ -122,7 +391,7 @@ body {
   pointer-events: none;
 }
 
-/* Wax seal */
+/* Wax seal base styles */
 .wax-seal {
   background: radial-gradient(circle at 30% 30%, #a03040 0%, var(--wax-red) 50%, #6b1a25 100%);
   box-shadow: 
@@ -131,7 +400,6 @@ body {
     inset 0 -2px 4px rgba(0,0,0,0.2),
     inset 0 2px 4px rgba(255,255,255,0.2);
   position: relative;
-  /* Hardware acceleration for wax seals */
   transform: translateZ(0);
   will-change: transform;
 }
@@ -148,18 +416,6 @@ body {
   pointer-events: none;
 }
 
-.wax-seal-green {
-  background: radial-gradient(circle at 30% 30%, #4a7c2a 0%, var(--wax-green) 50%, #1a3509 100%);
-}
-
-.wax-seal-blue {
-  background: radial-gradient(circle at 30% 30%, #3d5a8a 0%, var(--wax-blue) 50%, #0f1f35 100%);
-}
-
-.wax-seal-gold {
-  background: radial-gradient(circle at 30% 30%, #d4a030 0%, var(--wax-gold) 50%, #7a5c08 100%);
-}
-
 /* Envelope styles */
 .envelope {
   background: linear-gradient(135deg, #e8dcc0 0%, #d4c4a8 100%);
@@ -168,7 +424,7 @@ body {
     0 4px 6px -1px rgba(0, 0, 0, 0.1),
     0 2px 4px -1px rgba(0, 0, 0, 0.06),
     inset 0 1px 0 rgba(255,255,255,0.3);
-  transform: translateZ(0); /* Hardware acceleration */
+  transform: translateZ(0);
 }
 
 .envelope::before {
@@ -224,10 +480,10 @@ body {
   box-shadow: 
     0 2px 4px rgba(0,0,0,0.2),
     inset 0 1px 0 rgba(255,255,255,0.2);
-  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Only animate transform */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   position: relative;
   overflow: hidden;
-  transform: translateZ(0); /* Hardware acceleration */
+  transform: translateZ(0);
 }
 
 .vintage-btn::before {
@@ -283,7 +539,7 @@ body {
     0 4px 4px rgba(0,0,0,0.1),
     0 8px 8px rgba(0,0,0,0.1);
   position: relative;
-  transform: translateZ(0); /* Hardware acceleration */
+  transform: translateZ(0);
 }
 
 .letter-paper::before {
@@ -427,4 +683,14 @@ body {
   .vintage-input {
     transition-duration: 0.3s !important;
   }
+}
+
+/* Scrollbar hide utility */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
 }
