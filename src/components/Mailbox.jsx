@@ -107,7 +107,7 @@ export default function Mailbox({ onOpenLetter }) {
       </div>
 
       {/* Filter Tabs - Scrollable on mobile */}
-      <div className="flex flex-nowrap justify-start md:justify-center gap-2 overflow-x-auto pb-2 scrollbar-hide">
+      <div className="flex flex-nowrap justify-center md:justify-center gap-2 overflow-x-auto pb-2 scrollbar-hide pd-y">
         <FilterButton active={filter === 'all'} onClick={() => setFilter('all')} label="All" count={counts.all} icon={Inbox} />
         <FilterButton active={filter === 'received'} onClick={() => setFilter('received')} label="Received" count={counts.received} icon={Mail} />
         <FilterButton active={filter === 'sent'} onClick={() => setFilter('sent')} label="Sent" count={counts.sent} icon={Send} />
@@ -115,7 +115,7 @@ export default function Mailbox({ onOpenLetter }) {
       </div>
 
       {/* Letters Grid */}
-      <div className="grid gap-4 md:gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 pb-8">
+      <div className="grid gap-4 md:gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 pb-8 pd-x">
         {filteredLetters.map((letter) => {
           const status = getLetterStatus(letter)
           const isReceived = letter.recipient_id === user.id

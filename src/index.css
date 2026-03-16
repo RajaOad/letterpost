@@ -205,3 +205,11 @@ html {
   backface-visibility: hidden;
   perspective: 1000px;
 }
+
+.pd-y {
+  padding: 6vh 0;
+}
+
+.pd-x {
+  padding: 0 6vh;
+}
