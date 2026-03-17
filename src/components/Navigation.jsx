@@ -1,5 +1,5 @@
 import React from 'react'
-import { PenLine, LogOut, Inbox } from 'lucide-react'
+import { PenLine, LogOut, Inbox, User } from 'lucide-react'
 import { useAuth } from '../contexts/AuthContext'
 
 const isMobile = typeof window !== 'undefined' && window.innerWidth < 768
@@ -34,6 +34,13 @@ export default function Navigation({ currentView, setCurrentView, setSelectedLet
           </div>
 
           <div className="flex items-center gap-2 md:gap-3">
+
+            <NavButton 
+  active={currentView === 'profile'}
+  onClick={() => handleNav('profile')}
+  icon={<User className="w-6 h-6 md:w-5 md:h-5" />}
+  label="Profile"
+/>
             <NavButton 
               active={currentView === 'mailbox'}
               onClick={() => handleNav('mailbox')}

@@ -45,23 +45,21 @@ export function AuthProvider({ children }) {
   }
 
   const signUp = async (email, password, username, displayName) => {
-    const { data, error } = await supabase.auth.signUp({
-      email,
-      password,
-    })
-    
-    if (error) throw error
-    
-    if (data.user) {
-      await supabase.from('profiles').insert([{
-        id: data.user.id,
-        username,
-        display_name: displayName,
-      }])
+  const { data, error } = await supabase.auth.signUp({
+    email,
+    password,
+    options: {
+      data: {
+        username: username,
+        display_name: displayName
+      }
     }
-    
-    return data
-  }
+  })
+  
+  if (error) throw error
+  
+  return data
+}
 
   const signIn = async (email, password) => {
     const { data, error } = await supabase.auth.signInWithPassword({
@@ -102,6 +100,7 @@ export function AuthProvider({ children }) {
     signOut,
     resetPassword,
     updatePassword,
+    fetchProfile,
   }
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>

@@ -206,6 +206,11 @@ html {
   perspective: 1000px;
 }
 
+/* Display name color */
+.disname {
+  color: #fef3ce;
+}
+
 /* --- Vertical Padding --- */
 .pd-y {
   padding-top: 0rem;

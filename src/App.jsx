@@ -8,6 +8,7 @@ import LetterEditor from './components/LetterEditor'
 import LetterView from './components/LetterView'
 import Navigation from './components/Navigation'
 import { useAuth } from './contexts/AuthContext'
+import Profile from './components/Profile'
 
 const isMobile = typeof window !== 'undefined' && window.innerWidth < 768
 
@@ -70,8 +71,14 @@ function AppContent() {
                 setSelectedLetter(null)
                 setCurrentView('mailbox')
               }}
+              
             />
           )}
+          {currentView === 'profile' && (
+  <Profile 
+    onBack={() => setCurrentView('mailbox')}
+  />
+)}
         </main>
       </div>
     </div>
