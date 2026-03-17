@@ -225,8 +225,8 @@ html {
 
 /* --- Horizontal Padding (Switched to vw for consistency) --- */
 .pd-x {
-  padding-left: 5vw;
-  padding-right: 5vw;
+  padding-left: 4vw;
+  padding-right: 4vw;
 }
 @media (min-width: 768px) {
   .pd-x { padding: 0 3vh; } /* Kept vh for PC per your original design */
@@ -291,6 +291,13 @@ html {
 }
 @media (min-width: 768px) {
   .mr-b { margin-bottom: 3vh; }
+}
+
+.mr-sm {
+  margin: 0.5rem 0;
+}
+@media (min-width: 768px) {
+  .mr-sm { margin: 1vh 0; }
 }
 
 .mauto {
