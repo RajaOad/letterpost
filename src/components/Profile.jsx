@@ -228,7 +228,7 @@ export default function Profile({ onBack }) {
                     <User className="w-4 h-4" />
                     <span className="font-body text-xs uppercase tracking-wider font-bold">Username</span>
                   </div>
-                  <p className="font-body text-amber-900 text-lg">{profile?.username}</p>
+                  <p className="font-body text-amber-900 text-lg">@{profile?.username}</p>
                 </div>
               </div>
 
