@@ -249,7 +249,7 @@ html {
 }
 
 .pd-xy2 {
-  padding: 0.5rem 4vw;
+  padding: 1.5rem 4vw;
 }
 @media (min-width: 768px) {
   .pd-xy2 { padding: 4vh 6vh; }
@@ -291,6 +291,13 @@ html {
 }
 @media (min-width: 768px) {
   .mr-b { margin-bottom: 3vh; }
+}
+
+.mr-t {
+  margin-top: 0;
+}
+@media (min-width: 768px) {
+  .mr-t { margin-top: 3vh; }
 }
 
 .mr-sm {

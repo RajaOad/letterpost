@@ -115,7 +115,7 @@ export default function Mailbox({ onOpenLetter }) {
       </div>
 
       {/* Letters Grid */}
-      <div className="grid gap-4 md:gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 pb-8 pd-x mr-y">
+      <div className="grid gap-4 md:gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 pb-8 pd-x mr-b mr-t">
         {filteredLetters.map((letter) => {
           const status = getLetterStatus(letter)
           const isReceived = letter.recipient_id === user.id
