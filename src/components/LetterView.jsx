@@ -75,7 +75,7 @@ export default function LetterView({ letter, onBack }) {
       <div className="max-w-2xl mx-auto px-4 pb-8 mauto pd-y">
         <button
           onClick={onBack}
-          className="mb-6 md:mb-8 flex items-center gap-3 text-amber-900 hover:text-red-900 transition-colors font-serif group"
+          className="mb-6 pd-xy md:mb-8 flex items-center gap-3 text-amber-900 hover:text-red-900 transition-colors font-serif group"
         >
           <div className="p-2 bg-amber-100 rounded-full group-hover:bg-red-100 transition-colors border border-amber-300">
             <ArrowLeft className="w-5 h-5" />

@@ -273,7 +273,7 @@ html {
 }
 
 .mr-xy {
-  margin: 1rem 5vw;
+  margin: 0.5rem 5vw;
 }
 @media (min-width: 768px) {
   .mr-xy { margin: 2vh 3vh; }

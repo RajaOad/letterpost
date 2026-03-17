@@ -24,8 +24,8 @@ export default function Navigation({ currentView, setCurrentView, setSelectedLet
       <div className="w-full px-4 sm:px-6 lg:px-8 py-3 md:py-5 max-w-7xl mx-auto relative">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3 md:gap-5">
-            <div className="w-16 h-16 md:w-14 md:h-14 rounded-full bg-linear-to-br from-red-900 via-red-800 to-red-950 shadow-lg flex items-center justify-center border-2 md:border-4 border-amber-200 shrink-0">
-              <span className="font-serif text-4xl md:text-3xl text-amber-100 font-bold">S</span>
+            <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-linear-to-br from-red-900 via-red-800 to-red-950 shadow-lg flex items-center justify-center border-2 md:border-4 border-amber-200 shrink-0">
+              <span className="font-serif text-3xl md:text-3xl text-amber-100 font-bold">S</span>
             </div>
             <div className="min-w-0">
               <h2 className="font-serif text-xl md:text-3xl text-amber-950 font-bold tracking-wide truncate">Slow Letters</h2>
@@ -33,17 +33,17 @@ export default function Navigation({ currentView, setCurrentView, setSelectedLet
             </div>
           </div>
 
-          <div className="flex items-center gap-1 md:gap-3">
+          <div className="flex items-center gap-2 md:gap-3">
             <NavButton 
               active={currentView === 'mailbox'}
               onClick={() => handleNav('mailbox')}
-              icon={<Inbox className="w-8 h-8 md:w-5 md:h-5" />}
+              icon={<Inbox className="w-6 h-6 md:w-5 md:h-5" />}
               label="Mailbox"
             />
             <NavButton 
               active={currentView === 'compose'}
               onClick={() => handleNav('compose')}
-              icon={<PenLine className="w-8 h-8 md:w-5 md:h-5" />}
+              icon={<PenLine className="w-6 h-6 md:w-5 md:h-5" />}
               label="Compose"
             />
             <button
@@ -51,7 +51,7 @@ export default function Navigation({ currentView, setCurrentView, setSelectedLet
               className="ml-1 mr-l md:ml-4 p-2 md:p-3 text-amber-800 hover:text-red-900 hover:bg-red-100 rounded-full transition-colors border-2 border-transparent hover:border-red-800/20"
               title="Depart"
             >
-              <LogOut className="w-8 h-8 md:w-6 md:h-6" />
+              <LogOut className="w-6 h-6 md:w-6 md:h-6" />
             </button>
           </div>
         </div>
