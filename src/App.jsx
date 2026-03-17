@@ -2,6 +2,7 @@ import React from 'react'
 import { motion, LazyMotion, domAnimation } from 'framer-motion'
 import { AuthProvider } from './contexts/AuthContext'
 import Auth from './components/Auth'
+import ResetPassword from './components/ResetPassword'
 import Mailbox from './components/Mailbox'
 import LetterEditor from './components/LetterEditor'
 import LetterView from './components/LetterView'
@@ -10,10 +11,20 @@ import { useAuth } from './contexts/AuthContext'
 
 const isMobile = typeof window !== 'undefined' && window.innerWidth < 768
 
+function getPath() {
+  if (typeof window === 'undefined') return '/'
+  return window.location.pathname
+}
+
 function AppContent() {
   const { user, loading } = useAuth()
   const [currentView, setCurrentView] = React.useState('mailbox')
   const [selectedLetter, setSelectedLetter] = React.useState(null)
+  const path = getPath()
+
+  if (path === '/auth/reset-password') {
+    return <ResetPassword />
+  }
 
   if (loading) {
     return (
