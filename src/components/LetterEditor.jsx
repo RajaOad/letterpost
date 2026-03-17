@@ -89,8 +89,8 @@ export default function LetterEditor({ onSent }) {
           </div>
         </div>
 
-        <form onSubmit={handleSubmit} className="p-4 md:p-8 lg:p-12 space-y-6 md:space-y-10 relative pd-xy2">
-          <div className="space-y-3 mr-b">
+        <form onSubmit={handleSubmit} className="p-4 md:p-8 lg:p-12 space-y-6 md:space-y-10 relative pd-xy2 mr-b mr-x">
+          <div className="space-y-3 mr-y ">
             <label className="font-serif text-xs md:text-sm text-amber-900 uppercase tracking-[0.2em] font-bold flex items-center gap-2">
               <User className="w-4 h-4" />
               Addressee
@@ -126,7 +126,7 @@ export default function LetterEditor({ onSent }) {
             />
           </div>
 
-          <div className="grid md:grid-cols-2 gap-4 pd-xy md:gap-8 p-4 md:p-8 bg-amber-100/20 rounded-sm border-2 border-amber-800/10">
+          <div className="grid md:grid-cols-2 gap-4 pd-xy mr-b md:gap-8 p-4 md:p-8 bg-amber-100/20 rounded-sm border-2 border-amber-800/10">
             <div className="space-y-4">
               <label className="font-serif text-xs md:text-sm text-amber-900 uppercase tracking-[0.2em] font-bold flex items-center gap-2">
                 <div className="w-4 h-4 rounded-full bg-linear-to-br from-red-900 to-red-950"></div>

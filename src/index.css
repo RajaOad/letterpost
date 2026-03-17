@@ -242,20 +242,36 @@ html {
 
 /* --- Combined Padding --- */
 .pd-xy {
-  padding: 1.5rem 5vw;
+  padding: 0.5rem 3vw;
 }
 @media (min-width: 768px) {
   .pd-xy { padding: 2vh 3vh; }
 }
 
 .pd-xy2 {
-  padding: 2.5rem 6vw;
+  padding: 0.5rem 4vw;
 }
 @media (min-width: 768px) {
   .pd-xy2 { padding: 4vh 6vh; }
 }
 
 /* --- Margins --- */
+
+.mr-y {
+  margin: 1.5rem 0;
+}
+@media (min-width: 768px) {
+  .mr-y { margin: 3vh 0; }
+}
+
+.mr-x {
+  margin-left: 0;
+  margin-right: 0;
+}
+@media (min-width: 768px) {
+  .mr-x { margin: 0 3vh; }
+}
+
 .mr-xy {
   margin: 1rem 5vw;
 }
