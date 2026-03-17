@@ -115,7 +115,20 @@ export default function Auth() {
           <form onSubmit={handleSubmit} className="p-6 md:p-8 space-y-4 md:space-y-6 relative">
             {mode === 'signup' && (
               <div className="space-y-4">
+
                 <div className="relative">
+                  <Feather className="absolute left-0 top-3.5 w-5 h-5 text-amber-600" />
+                  <input
+                    type="text"
+                    placeholder="Name"
+                    value={displayName}
+                    onChange={(e) => setDisplayName(e.target.value)}
+                    className="w-full pl-12 pr-4 py-3 pd-xy bg-[#fdfbf7] border-2 border-amber-300 rounded-sm font-body text-amber-900 placeholder-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200 focus:border-amber-500 transition-all"
+                    required
+                  />
+                </div>
+
+                 <div className="relative">
                   <User className="absolute left-0 top-3.5 w-5 h-5 text-amber-600" />
                   <input
                     type="text"
@@ -126,17 +139,7 @@ export default function Auth() {
                     required
                   />
                 </div>
-                <div className="relative">
-                  <Feather className="absolute left-0 top-3.5 w-5 h-5 text-amber-600" />
-                  <input
-                    type="text"
-                    placeholder="Display Name"
-                    value={displayName}
-                    onChange={(e) => setDisplayName(e.target.value)}
-                    className="w-full pl-12 pr-4 py-3 pd-xy bg-[#fdfbf7] border-2 border-amber-300 rounded-sm font-body text-amber-900 placeholder-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-200 focus:border-amber-500 transition-all"
-                    required
-                  />
-                </div>
+
               </div>
             )}
 
